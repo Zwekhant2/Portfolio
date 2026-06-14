@@ -231,6 +231,36 @@
     position: relative;
     overflow: hidden;
   }
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 260px;
+    gap: 64px;
+    align-items: start;
+  }
+  .hero-photo-wrap {
+    position: relative;
+    flex-shrink: 0;
+  }
+  .hero-photo {
+    width: 260px;
+    height: 310px;
+    object-fit: cover;
+    object-position: center 15%;
+    display: block;
+    border: 1px solid var(--rule);
+    filter: grayscale(12%);
+    transition: filter 0.4s;
+  }
+  .hero-photo:hover { filter: grayscale(0%); }
+  .hero-photo-label {
+    margin-top: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-align: center;
+  }
   .hero::before {
     content: '';
     position: absolute; top: -160px; right: -200px;
@@ -578,6 +608,10 @@
     .card-meta { grid-column: 1 / -1; border-left: none; border-top: 1px solid var(--rule); flex-direction: row; gap: 20px; padding: 16px 28px; align-items: center; flex-wrap: wrap; }
     .card-preview { min-height: 160px; }
   }
+  @media (max-width: 760px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-photo-wrap { display: none; }
+  }
   @media (max-width: 680px) {
     .wrap { padding: 0 22px; }
     .strip-inner { padding: 12px 22px; }
@@ -667,37 +701,46 @@
   <!-- ─── Hero ─── -->
   <div class="wrap">
     <section class="hero">
-      <h1 class="fade fade-1">
-        Web developer<br>
-        &amp; <span class="ital">designer,</span><br>
-        I build, ship,<br>
-        &amp; <span class="accent">maintain</span>.
-      </h1>
-      <p class="hero-sub fade fade-2">
-        Helsinki-based IT graduate with a hands-on approach. I build and maintain websites, configure networks and Linux systems, and deploy cloud infrastructure from DNS and cabling to AWS CloudFormation. Recently graduated with a BBA from <a href="https://www.haaga-helia.fi/en" target="_blank" rel="noopener">Haaga-Helia</a> and completed a traineeship at <a href="https://speedzone.fi" target="_blank" rel="noopener">SpeedZone</a>.
-      </p>
-      <div class="hero-meta fade fade-3">
-        <span>Education<strong>BBA Graduate, Haaga-Helia</strong></span>
-        <span>Experience<strong>Web Dev, SpeedZone</strong></span>
-        <span>Thesis<strong>Grade 5 · WP Security</strong></span>
-      </div>
-      <div class="hero-stats fade fade-4">
-        <div class="stat">
-          <span class="stat-num" data-target="4">0</span>
-          <span class="stat-label">Projects</span>
+      <div class="hero-inner">
+        <div>
+          <h1 class="fade fade-1">
+            Web developer<br>
+            &amp; <span class="ital">designer,</span><br>
+            I build, ship,<br>
+            &amp; <span class="accent">maintain</span>.
+          </h1>
+          <p class="hero-sub fade fade-2">
+            Helsinki-based IT graduate with a hands-on approach. I build and maintain websites, configure networks and Linux systems, and deploy cloud infrastructure from DNS and cabling to AWS CloudFormation. Recently graduated with a BBA from <a href="https://www.haaga-helia.fi/en" target="_blank" rel="noopener">Haaga-Helia</a> and completed a traineeship at <a href="https://speedzone.fi" target="_blank" rel="noopener">SpeedZone</a>.
+          </p>
+          <div class="hero-meta fade fade-3">
+            <span>Education<strong>BBA Graduate, Haaga-Helia</strong></span>
+            <span>Experience<strong>Web Dev, SpeedZone</strong></span>
+            <span>Thesis<strong>Grade 5 · WP Security</strong></span>
+          </div>
+          <div class="hero-stats fade fade-4">
+            <div class="stat">
+              <span class="stat-num" data-target="4">0</span>
+              <span class="stat-label">Projects</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num"><span class="stat-suffix">5 / 5</span></span>
+              <span class="stat-label">Thesis grade</span>
+            </div>
+            <div class="stat">
+              <span class="stat-num" data-target="2">0</span><span class="stat-num" style="font-size:24px;color:var(--accent);font-style:italic;">+</span>
+              <span class="stat-label">Years coding</span>
+            </div>
+          </div>
+          <div class="scroll-hint fade fade-5" aria-hidden="true">
+            <div class="scroll-line"></div>
+            Scroll to explore
+          </div>
         </div>
-        <div class="stat">
-          <span class="stat-num"><span class="stat-suffix">5 / 5</span></span>
-          <span class="stat-label">Thesis grade</span>
+
+        <div class="hero-photo-wrap fade fade-2">
+          <img class="hero-photo" src="photo.jpg" alt="Zwe Khant Lwin">
+          <p class="hero-photo-label">Zwe Khant Lwin · Vantaa, FI</p>
         </div>
-        <div class="stat">
-          <span class="stat-num" data-target="2">0</span><span class="stat-num" style="font-size:24px;color:var(--accent);font-style:italic;">+</span>
-          <span class="stat-label">Years coding</span>
-        </div>
-      </div>
-      <div class="scroll-hint fade fade-5" aria-hidden="true">
-        <div class="scroll-line"></div>
-        Scroll to explore
       </div>
     </section>
   </div>
