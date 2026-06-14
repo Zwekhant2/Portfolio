@@ -1,19 +1,10 @@
-// Simple interactivity: mobile nav toggle & year
-document.addEventListener('DOMContentLoaded', function () {
-  const navToggle = document.getElementById('nav-toggle');
-  const mainNav = document.getElementById('main-nav');
-  const yearEl = document.getElementById('year');
-  if (yearEl) yearEl.textContent = new Date().getFullYear();
-
-  if (navToggle && mainNav) {
-    navToggle.addEventListener('click', function () {
-      mainNav.style.display = mainNav.style.display === 'block' ? '' : 'block';
-    });
-    // Close nav after clicking a link (mobile)
-    mainNav.addEventListener('click', function (e) {
-      if (e.target.tagName === 'A' && window.innerWidth <= 600) {
-        mainNav.style.display = '';
-      }
-    });
-  }
-});
+// Set the "last deployed" date to today, in DD.MM.YYYY (Finnish format).
+(function () {
+  var el = document.getElementById('deploy-date');
+  if (!el) return;
+  var d = new Date();
+  var dd = String(d.getDate()).padStart(2, '0');
+  var mm = String(d.getMonth() + 1).padStart(2, '0');
+  var yyyy = d.getFullYear();
+  el.textContent = dd + '.' + mm + '.' + yyyy;
+})();
