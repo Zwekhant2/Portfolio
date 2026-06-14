@@ -5,6 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Zwe Khant Lwin — Web Developer &amp; Designer</title>
 <meta name="description" content="Zwe Khant Lwin — web developer and designer based in Helsinki. I build interfaces, ship sites, and run the infrastructure behind them.">
+
+<!-- Open Graph -->
+<meta property="og:title"       content="Zwe Khant Lwin — Web Developer &amp; Designer">
+<meta property="og:description" content="Helsinki-based web developer. HTML/CSS, WordPress, AWS. BBA graduate, thesis graded 5/5.">
+<meta property="og:type"        content="website">
+<meta property="og:url"         content="https://zwekhant2.github.io/Portfolio/">
+<meta property="og:image"       content="https://zwekhant2.github.io/Portfolio/og.png">
+<meta name="twitter:card"       content="summary_large_image">
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23002FA7'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Georgia%2Cserif' font-size='20' font-style='italic' fill='white'%3EZ%3C/text%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT@0,9..144,300..900,0..100;1,9..144,300..900,0..100&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -468,6 +480,86 @@
   .footer-row { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 
   /* ─── Responsive ────────────────────────────────────────────── */
+  /* ─── CV button ────────────────────────────────────────────── */
+  .cv-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 28px;
+    padding: 13px 24px;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    transition: background 0.22s, color 0.22s, gap 0.22s;
+    cursor: pointer;
+  }
+  .cv-btn:hover { background: var(--accent); color: var(--paper); gap: 16px; }
+
+  /* ─── Hamburger (mobile) ────────────────────────────────────── */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    padding: 4px;
+    cursor: pointer;
+  }
+  .hamburger span {
+    display: block;
+    width: 22px; height: 1.5px;
+    background: var(--ink);
+    transition: transform 0.3s var(--ease), opacity 0.3s;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+  /* ─── Mobile menu overlay ───────────────────────────────────── */
+  .mob-menu {
+    position: fixed;
+    inset: 0; top: 47px;
+    background: var(--paper);
+    z-index: 99;
+    display: flex;
+    flex-direction: column;
+    padding: 40px 28px;
+    gap: 0;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+    border-top: 1px solid var(--rule);
+  }
+  .mob-menu.open { opacity: 1; transform: translateY(0); pointer-events: all; }
+  .mob-menu a {
+    font-family: 'Fraunces', Georgia, serif;
+    font-size: clamp(32px, 8vw, 52px);
+    font-weight: 400;
+    font-variation-settings: "opsz" 72;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    padding: 12px 0;
+    border-bottom: 1px solid var(--rule);
+    transition: color 0.2s, padding-left 0.2s;
+  }
+  .mob-menu a:hover { color: var(--accent); padding-left: 8px; }
+
+  /* ─── Card preview illustrations ───────────────────────────── */
+  .card-illustration {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+  }
+  .card-illustration svg { width: 100%; max-width: 200px; height: auto; opacity: 0.35; transition: opacity 0.3s; }
+  .work-card:hover .card-illustration svg { opacity: 0.6; }
+
   @media (max-width: 860px) {
     .work-card { grid-template-columns: 200px 1fr; }
     .card-meta { grid-column: 1 / -1; border-left: none; border-top: 1px solid var(--rule); flex-direction: row; gap: 20px; padding: 16px 28px; align-items: center; flex-wrap: wrap; }
@@ -477,6 +569,7 @@
     .wrap { padding: 0 22px; }
     .strip-inner { padding: 12px 22px; }
     .strip-nav { display: none; }
+    .hamburger { display: flex; }
     .hero { padding: 70px 0 64px; }
     .section { padding: 64px 0; }
     .hero-meta { gap: 28px; }
@@ -536,9 +629,20 @@
         Available · Helsinki
       </span>
       <button class="theme-toggle" id="theme-toggle" aria-label="Toggle colour theme">Dark</button>
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
     </div>
   </div>
 </div>
+
+<!-- Mobile menu -->
+<nav class="mob-menu" id="mob-menu" aria-label="Mobile navigation">
+  <a href="#work"         class="mob-link">Work</a>
+  <a href="#now"          class="mob-link">Now</a>
+  <a href="#capabilities" class="mob-link">Skills</a>
+  <a href="#contact"      class="mob-link">Contact</a>
+</nav>
 
 <main>
 
@@ -552,7 +656,7 @@
         &amp; <span class="accent">maintain</span>.
       </h1>
       <p class="hero-sub fade fade-2">
-        Based in Helsinki. I design and build responsive websites in HTML, CSS, and WordPress, and run the infrastructure behind them on AWS and Linux. Recently completed a web development traineeship at <a href="https://speedzone.fi" target="_blank" rel="noopener">SpeedZone</a> (Zone Media OY) and graduated with a BBA in Business Information Technology from Haaga-Helia.
+        Helsinki-based web developer with a security mindset. I design and build responsive websites, migrate and maintain live production systems, and handle the infrastructure behind them — from DNS to AWS CloudFormation. Recently graduated with a BBA from <a href="https://www.haaga-helia.fi/en" target="_blank" rel="noopener">Haaga-Helia</a> and completed a traineeship at <a href="https://speedzone.fi" target="_blank" rel="noopener">SpeedZone</a>.
       </p>
       <div class="hero-meta fade fade-3">
         <span>Education<strong>BBA Graduate, Haaga-Helia</strong></span>
@@ -601,6 +705,30 @@
         <article class="work-card tilt reveal reveal-d1">
           <div class="card-preview" data-color="blue">
             <span class="preview-num">[01]</span>
+            <div class="card-illustration">
+              <!-- E-commerce storefront -->
+              <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="0" y="0" width="200" height="18" rx="2" fill="white"/>
+                <rect x="4" y="4" width="40" height="10" rx="1" fill="rgba(255,255,255,0.3)"/>
+                <rect x="140" y="4" width="24" height="10" rx="1" fill="rgba(255,255,255,0.3)"/>
+                <rect x="168" y="4" width="28" height="10" rx="1" fill="rgba(255,255,255,0.5)"/>
+                <rect x="0" y="24" width="62" height="80" rx="2" fill="white"/>
+                <rect x="4" y="28" width="54" height="38" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="4" y="70" width="36" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="4" y="80" width="26" height="5" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="4" y="90" width="54" height="10" rx="1" fill="rgba(255,255,255,0.5)"/>
+                <rect x="68" y="24" width="62" height="80" rx="2" fill="white"/>
+                <rect x="72" y="28" width="54" height="38" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="72" y="70" width="36" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="72" y="80" width="26" height="5" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="72" y="90" width="54" height="10" rx="1" fill="rgba(255,255,255,0.5)"/>
+                <rect x="136" y="24" width="62" height="80" rx="2" fill="white"/>
+                <rect x="140" y="28" width="54" height="38" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="140" y="70" width="36" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="140" y="80" width="26" height="5" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="140" y="90" width="54" height="10" rx="1" fill="rgba(255,255,255,0.5)"/>
+              </svg>
+            </div>
             <div class="preview-chips">
               <span class="chip">HTML5</span><span class="chip">CSS3</span>
               <span class="chip">Responsive</span><span class="chip">E-commerce</span>
@@ -621,6 +749,35 @@
         <article class="work-card tilt reveal reveal-d2">
           <div class="card-preview" data-color="green">
             <span class="preview-num">[02]</span>
+            <div class="card-illustration">
+              <!-- Server migration -->
+              <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="20" width="70" height="22" rx="3" fill="white"/>
+                <circle cx="14" cy="31" r="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="22" y="27" width="32" height="4" rx="1" fill="rgba(255,255,255,0.35)"/>
+                <rect x="22" y="33" width="20" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="62" y="27" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="4" y="48" width="70" height="22" rx="3" fill="white"/>
+                <circle cx="14" cy="59" r="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="22" y="55" width="32" height="4" rx="1" fill="rgba(255,255,255,0.35)"/>
+                <rect x="22" y="61" width="20" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="62" y="55" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="4" y="76" width="70" height="22" rx="3" fill="white"/>
+                <circle cx="14" cy="87" r="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="22" y="83" width="32" height="4" rx="1" fill="rgba(255,255,255,0.35)"/>
+                <rect x="22" y="89" width="20" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="62" y="83" width="6" height="6" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <path d="M82 60 L116 60" stroke="white" stroke-width="1.5" stroke-dasharray="4 3"/>
+                <path d="M110 54 L118 60 L110 66" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="124" y="20" width="70" height="80" rx="3" fill="white"/>
+                <rect x="130" y="28" width="58" height="8" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="130" y="40" width="40" height="4" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="130" y="48" width="50" height="4" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="130" y="56" width="34" height="4" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="130" y="72" width="58" height="18" rx="1" fill="rgba(255,255,255,0.15)"/>
+                <circle cx="158" cy="81" r="5" fill="rgba(255,255,255,0.35)"/>
+              </svg>
+            </div>
             <div class="preview-chips">
               <span class="chip">WordPress</span><span class="chip">phpMyAdmin</span>
               <span class="chip">DNS</span><span class="chip">Migration</span>
@@ -641,6 +798,32 @@
         <article class="work-card tilt reveal reveal-d3">
           <div class="card-preview" data-color="amber">
             <span class="preview-num">[03]</span>
+            <div class="card-illustration">
+              <!-- AWS architecture diagram -->
+              <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="6" y="6" width="188" height="108" rx="4" stroke="white" stroke-width="1" stroke-dasharray="5 3"/>
+                <rect x="16" y="16" width="168" height="88" rx="3" stroke="white" stroke-width="1" stroke-dasharray="4 3" opacity="0.6"/>
+                <rect x="26" y="28" width="52" height="32" rx="2" fill="white"/>
+                <rect x="30" y="32" width="20" height="4" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="30" y="38" width="38" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="30" y="43" width="30" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="30" y="50" width="42" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                <rect x="122" y="28" width="52" height="32" rx="2" fill="white"/>
+                <rect x="126" y="32" width="20" height="4" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="126" y="38" width="38" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="126" y="43" width="30" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="126" y="50" width="42" height="6" rx="1" fill="rgba(255,255,255,0.35)"/>
+                <rect x="74" y="34" width="52" height="20" rx="2" fill="white"/>
+                <rect x="78" y="38" width="16" height="4" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="78" y="44" width="40" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <path d="M78 44 L122 44" stroke="white" stroke-width="1" stroke-dasharray="3 2"/>
+                <rect x="60" y="76" width="80" height="26" rx="2" fill="white"/>
+                <rect x="64" y="80" width="24" height="4" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="64" y="87" width="64" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="64" y="93" width="48" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <path d="M100 60 L100 76" stroke="white" stroke-width="1"/>
+              </svg>
+            </div>
             <div class="preview-chips">
               <span class="chip">AWS</span><span class="chip">CloudFormation</span>
               <span class="chip">VPC</span><span class="chip">IAM</span>
@@ -660,6 +843,24 @@
         <article class="work-card tilt reveal reveal-d4">
           <div class="card-preview" data-color="violet">
             <span class="preview-num">[04]</span>
+            <div class="card-illustration">
+              <!-- Research document + shield -->
+              <svg viewBox="0 0 200 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="10" width="90" height="100" rx="3" fill="white"/>
+                <rect x="28" y="20" width="50" height="6" rx="1" fill="rgba(255,255,255,0.5)"/>
+                <rect x="28" y="30" width="74" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="28" y="36" width="68" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="28" y="42" width="74" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+                <rect x="28" y="52" width="40" height="5" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="28" y="61" width="74" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="28" y="67" width="60" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="28" y="73" width="70" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="28" y="79" width="55" height="3" rx="1" fill="rgba(255,255,255,0.2)"/>
+                <rect x="28" y="89" width="36" height="10" rx="1" fill="rgba(255,255,255,0.35)"/>
+                <path d="M148 18 C148 18 174 26 174 50 C174 68 162 80 148 86 C134 80 122 68 122 50 C122 26 148 18 148 18Z" fill="white"/>
+                <path d="M137 52 L145 60 L162 42" stroke="rgba(255,255,255,0.3)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
             <div class="preview-chips">
               <span class="chip">Security</span><span class="chip">WordPress</span>
               <span class="chip">Research</span><span class="chip">Attack-tree</span>
@@ -756,6 +957,11 @@
       <a class="contact-mail reveal reveal-d2" id="mag-btn" href="mailto:zwekhantlwin5@gmail.com">
         zwekhantlwin5@gmail.com →
       </a>
+      <div class="reveal reveal-d2" style="margin-top:20px;">
+        <a class="cv-btn" href="cv.pdf" download aria-label="Download CV as PDF">
+          Download CV ↓
+        </a>
+      </div>
       <div class="contact-links reveal reveal-d3">
         <a href="https://www.linkedin.com/in/zwe-khant-lwin" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a href="https://github.com/Zwekhant2" target="_blank" rel="noopener">GitHub ↗</a>
@@ -918,6 +1124,26 @@
     });
     mag.addEventListener('mouseleave', function () {
       mag.style.transform = '';
+    });
+  }
+
+  /* ── Mobile hamburger ── */
+  var hbg     = document.getElementById('hamburger');
+  var mobMenu = document.getElementById('mob-menu');
+  if (hbg && mobMenu) {
+    hbg.addEventListener('click', function () {
+      var open = mobMenu.classList.toggle('open');
+      hbg.classList.toggle('open', open);
+      hbg.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    });
+    document.querySelectorAll('.mob-link').forEach(function (a) {
+      a.addEventListener('click', function () {
+        mobMenu.classList.remove('open');
+        hbg.classList.remove('open');
+        hbg.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+      });
     });
   }
 
