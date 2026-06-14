@@ -32,6 +32,7 @@
     --accent:  #002FA7;
     --status:  #2E7D4F;
     --ease:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    --dot:     rgba(21, 22, 26, 0.09);
   }
   [data-theme="dark"] {
     --paper:   #0E0F13;
@@ -42,6 +43,7 @@
     --rule:    #262830;
     --accent:  #4D7FFF;
     --status:  #3EAD6A;
+    --dot:     rgba(230, 226, 214, 0.055);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -96,13 +98,24 @@
   @keyframes i-rise { to { opacity: 1; transform: translateY(0); } }
   @keyframes i-line { to { width: 64px; } }
 
+  /* ─── Dot grid background ──────────────────────────────────── */
+  .dot-grid {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+    background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
+    background-size: 26px 26px;
+    transition: background-image 0.4s;
+  }
+
   /* ─── Grain noise overlay ───────────────────────────────────── */
   .grain {
     position: fixed;
     inset: 0;
     pointer-events: none;
     z-index: 9997;
-    opacity: 0.03;
+    opacity: 0.028;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='250' height='250'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='250' height='250' filter='url(%23n)'/%3E%3C/svg%3E");
   }
 
@@ -600,6 +613,9 @@
   <div class="intro-mono">ZKL</div>
   <div class="intro-rule"></div>
 </div>
+
+<!-- ─── Dot grid ─── -->
+<div class="dot-grid" aria-hidden="true"></div>
 
 <!-- ─── Grain overlay ─── -->
 <div class="grain" aria-hidden="true"></div>
