@@ -32,7 +32,7 @@
     --accent:  #002FA7;
     --status:  #2E7D4F;
     --ease:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    --dot:     rgba(21, 22, 26, 0.2);
+    --dot:     rgba(21, 22, 26, 0.07);
   }
   [data-theme="dark"] {
     --paper:   #0E0F13;
@@ -43,7 +43,7 @@
     --rule:    #262830;
     --accent:  #4D7FFF;
     --status:  #3EAD6A;
-    --dot:     rgba(230, 226, 214, 0.13);
+    --dot:     rgba(230, 226, 214, 0.05);
   }
 
   *, *::before, *::after { box-sizing: border-box; }
@@ -104,8 +104,8 @@
     inset: 0;
     pointer-events: none;
     z-index: 0;
-    background-image: radial-gradient(circle, var(--dot) 1.5px, transparent 1.5px);
-    background-size: 24px 24px;
+    background-image: radial-gradient(circle, var(--dot) 1px, transparent 1px);
+    background-size: 28px 28px;
     transition: background-image 0.4s;
   }
 
