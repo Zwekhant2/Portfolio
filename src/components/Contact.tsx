@@ -1,6 +1,6 @@
 import { useReveal } from '../hooks/useReveal'
 import { useMagnetic } from '../hooks/useMagnetic'
-import { SectionLabel } from './SectionLabel'
+import { SectionHeading } from './SectionHeading'
 
 export function Contact() {
   const { ref: revealRef, visible } = useReveal<HTMLElement>()
@@ -8,7 +8,7 @@ export function Contact() {
 
   return (
     <section ref={revealRef} className="section" id="contact">
-      <SectionLabel text="Contact · let's build something" />
+      <SectionHeading eyebrow="Contact · let's build something" title="Talk" />
       <h2 className={`contact-headline reveal reveal-d1${visible ? ' visible' : ''}`}>
         If you're hiring, collaborating, or just <span className="ital">curious,</span> say hello.
       </h2>

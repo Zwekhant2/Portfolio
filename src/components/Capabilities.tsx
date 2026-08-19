@@ -1,6 +1,6 @@
 import { capabilities } from '../data/capabilities'
 import { useReveal } from '../hooks/useReveal'
-import { SectionLabel } from './SectionLabel'
+import { SectionHeading } from './SectionHeading'
 
 function CapColumn({ title, items, delay }: { title: string; items: string[]; delay: 1 | 2 | 3 }) {
   const { ref, visible } = useReveal<HTMLDivElement>()
@@ -21,7 +21,7 @@ function CapColumn({ title, items, delay }: { title: string; items: string[]; de
 export function Capabilities() {
   return (
     <section className="section" id="capabilities">
-      <SectionLabel text="Capabilities · what I can do for you" />
+      <SectionHeading eyebrow="Capabilities · what I can do for you" title="Skills" />
       <div className="cap-grid">
         {capabilities.map((col, i) => (
           <CapColumn key={col.title} title={col.title} items={col.items} delay={((i % 3) + 1) as 1 | 2 | 3} />

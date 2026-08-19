@@ -1,13 +1,13 @@
 import { certifications, languages } from '../data/credentials'
 import { useReveal } from '../hooks/useReveal'
-import { SectionLabel } from './SectionLabel'
+import { SectionHeading } from './SectionHeading'
 
 export function Credentials() {
   const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
     <section className="section" id="certifications">
-      <SectionLabel text="Credentials · certifications & languages" />
+      <SectionHeading eyebrow="Credentials · certifications & languages" title="Credentials" />
       <div ref={ref} className={`credentials-grid reveal reveal-d1${visible ? ' visible' : ''}`}>
         <div>
           <h4 className="credentials-heading">Certifications</h4>

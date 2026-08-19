@@ -1,12 +1,12 @@
 import { useReveal } from '../hooks/useReveal'
-import { SectionLabel } from './SectionLabel'
+import { SectionHeading } from './SectionHeading'
 
 export function NowSection() {
   const { ref, visible } = useReveal<HTMLDListElement>()
 
   return (
     <section className="section" id="now">
-      <SectionLabel text="Now · what I'm doing this season" />
+      <SectionHeading eyebrow="Now · what I'm doing this season" title="Now" />
       <dl ref={ref} className={`now-grid reveal reveal-d1${visible ? ' visible' : ''}`}>
         <dt>Recently</dt>
         <dd>

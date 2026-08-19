@@ -6,7 +6,6 @@ const NAV_ITEMS = [
   { id: 'now', label: 'Now' },
   { id: 'capabilities', label: 'Skills' },
   { id: 'certifications', label: 'Certs' },
-  { id: 'contact', label: 'Contact' },
 ]
 
 interface NavStripProps {
@@ -17,12 +16,15 @@ interface NavStripProps {
 }
 
 export function NavStrip({ theme, onToggleTheme, menuOpen, onToggleMenu }: NavStripProps) {
-  const active = useActiveSection(NAV_ITEMS.map((item) => item.id))
+  const active = useActiveSection([...NAV_ITEMS.map((item) => item.id), 'contact'])
 
   return (
     <div className="strip">
       <div className="strip-inner">
-        <span className="strip-name">Zwe Khant Lwin</span>
+        <a href="#" className="strip-mark" aria-label="Zwe Khant Lwin — home">
+          <span className="strip-mark-badge">Z</span>
+          <span className="strip-name">Zwe Khant Lwin</span>
+        </a>
         <nav aria-label="Page sections">
           <ul className="strip-nav">
             {NAV_ITEMS.map((item) => (
@@ -35,13 +37,12 @@ export function NavStrip({ theme, onToggleTheme, menuOpen, onToggleMenu }: NavSt
           </ul>
         </nav>
         <div className="strip-right">
-          <span className="strip-status">
-            <span className="dot" aria-hidden="true"></span>
-            Available · Helsinki
-          </span>
           <button className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle colour theme">
             {theme === 'dark' ? 'Light' : 'Dark'}
           </button>
+          <a href="#contact" className={`pill pill-solid pill-sm${active === 'contact' ? ' active' : ''}`}>
+            Contact
+          </a>
           <button
             className={`hamburger${menuOpen ? ' open' : ''}`}
             onClick={onToggleMenu}
