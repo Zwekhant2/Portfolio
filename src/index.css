@@ -271,7 +271,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .hero-v2-photo {
   position: absolute;
   right: 6%;
-  bottom: -12%;
+  bottom: 6%;
   width: clamp(120px, 15vw, 210px);
   aspect-ratio: 3 / 4;
   object-fit: cover;
@@ -286,7 +286,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 
 .hero-v2-sub {
   font-size: 17px; max-width: 620px; color: var(--ink-2);
-  margin: 28px 0 0;
+  margin: 44px 0 0;
 }
 .hero-v2-stats {
   margin-top: 24px; display: flex; gap: 32px; flex-wrap: wrap;
