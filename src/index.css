@@ -253,7 +253,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .hero-v2-eyebrow {
   font-size: 18px; color: var(--ink-2); margin: 8px 0 0;
 }
-.hero-v2-type { position: relative; }
+.hero-v2-type { position: relative; margin-top: clamp(24px, 5vw, 56px); }
 .display-fill, .display-outline {
   font-family: var(--font-display);
   font-weight: 800;
@@ -271,8 +271,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .hero-v2-photo {
   position: absolute;
   right: 6%;
-  bottom: 6%;
-  width: clamp(120px, 15vw, 210px);
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(110px, 14vw, 200px);
   aspect-ratio: 3 / 4;
   object-fit: cover;
   object-position: center 15%;

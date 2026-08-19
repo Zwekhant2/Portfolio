@@ -21,8 +21,8 @@ export function Hero() {
           <h1 className="display-fill">Web developer</h1>
           <div className="hero-v2-line2">
             <h1 className="display-outline">&amp; designer</h1>
-            <img className="hero-v2-photo" src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Zwe Khant Lwin" />
           </div>
+          <img className="hero-v2-photo" src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Zwe Khant Lwin" />
         </div>
 
         <p className="hero-v2-sub fade fade-3">
