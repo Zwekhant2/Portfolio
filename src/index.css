@@ -12,7 +12,7 @@
   --ease:    cubic-bezier(0.25, 0.46, 0.45, 0.94);
   --dot:     rgba(10, 10, 10, 0.07);
 
-  --font-display: 'Anton', 'Arial Narrow', sans-serif;
+  --font-display: 'Bricolage Grotesque', 'Inter', sans-serif;
   --font-body: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 }
@@ -63,8 +63,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 #intro.out { opacity: 0; visibility: hidden; pointer-events: none; }
 .intro-mono {
   font-family: var(--font-display);
+  font-weight: 800;
   font-size: 52px;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
   color: var(--ink);
   opacity: 0;
   transform: translateY(14px);
@@ -158,7 +159,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   display: flex; align-items: center; justify-content: center;
   width: 26px; height: 26px; border-radius: 50%;
   background: var(--accent); color: var(--accent-ink);
-  font-family: var(--font-display); font-size: 14px; letter-spacing: 0;
+  font-family: var(--font-display); font-weight: 800; font-size: 14px; letter-spacing: 0;
   flex-shrink: 0;
 }
 .strip-name {
@@ -181,7 +182,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .strip-nav a:hover::after, .strip-nav a.active::after { width: 100%; }
 .strip-right { display: flex; align-items: center; gap: 14px; flex-shrink: 0; }
 .theme-toggle {
-  background: none; border: 1px solid var(--rule); border-radius: 999px;
+  background: none; border: 1px solid var(--rule); border-radius: 8px;
   padding: 6px 12px; font-family: var(--font-mono);
   font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;
   color: var(--muted); cursor: pointer; line-height: 1;
@@ -192,7 +193,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 /* ─── Pill buttons ──────────────────────────────────────────── */
 .pill {
   display: inline-flex; align-items: center; gap: 8px;
-  padding: 12px 22px; border-radius: 999px;
+  padding: 12px 22px; border-radius: 10px;
   font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase;
   border: 1.5px solid transparent;
   transition: transform 0.2s var(--ease), background 0.2s, color 0.2s, border-color 0.2s, gap 0.2s;
@@ -255,17 +256,16 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .hero-v2-type { position: relative; }
 .display-fill, .display-outline {
   font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: clamp(36px, 6vw, 100px);
-  line-height: 0.9;
-  letter-spacing: -0.005em;
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 96px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
   margin: 0;
   color: var(--ink);
   white-space: nowrap;
 }
 .display-outline {
-  color: transparent;
-  -webkit-text-stroke: 1.5px var(--ink);
+  color: var(--accent);
 }
 .hero-v2-line2 { position: relative; display: flex; align-items: center; }
 .hero-v2-photo {
@@ -352,10 +352,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .scramble-chr { color: var(--accent); opacity: 0.55; }
 .section-title {
   font-family: var(--font-display);
-  text-transform: uppercase;
-  font-size: clamp(40px, 7vw, 88px);
-  line-height: 0.9;
-  letter-spacing: -0.005em;
+  font-weight: 800;
+  font-size: clamp(36px, 6vw, 76px);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
   margin: 6px 0 0;
   color: var(--ink);
 }
@@ -408,9 +408,9 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .work-card:hover .card-body { padding-left: 44px; }
 .card-num { font-family: var(--font-mono); font-size: 11px; color: var(--muted); letter-spacing: 0.06em; }
 .card-body h3 {
-  font-family: var(--font-display); text-transform: uppercase; font-weight: 400;
-  font-size: 30px;
-  line-height: 1.05; letter-spacing: -0.005em; margin: 0; color: var(--ink);
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 28px;
+  line-height: 1.1; letter-spacing: -0.015em; margin: 0; color: var(--ink);
 }
 .card-body p { margin: 0; color: var(--ink-2); font-size: 14.5px; line-height: 1.6; max-width: 480px; }
 .card-link {
@@ -442,8 +442,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 /* ─── Capabilities ──────────────────────────────────────────── */
 .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; }
 .cap-col h4 {
-  font-family: var(--font-display); text-transform: uppercase; font-weight: 400;
-  font-size: 22px; letter-spacing: 0; color: var(--accent); margin: 0 0 16px;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 21px; letter-spacing: -0.01em; color: var(--accent); margin: 0 0 16px;
 }
 .cap-col ul { list-style: none; padding: 0; margin: 0; }
 .cap-col li {
@@ -459,8 +459,8 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 /* ─── Credentials & languages ────────────────────────────────── */
 .credentials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
 .credentials-heading {
-  font-family: var(--font-display); text-transform: uppercase; font-weight: 400;
-  font-size: 22px; color: var(--accent); margin: 0 0 16px;
+  font-family: var(--font-display); font-weight: 700;
+  font-size: 21px; letter-spacing: -0.01em; color: var(--accent); margin: 0 0 16px;
 }
 .credentials-list { border-top: 1px solid var(--rule); }
 .credentials-row {
@@ -479,14 +479,14 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 
 /* ─── Contact ───────────────────────────────────────────────── */
 .contact-headline {
-  font-family: var(--font-display); text-transform: uppercase; font-weight: 400;
-  font-size: clamp(32px, 5.2vw, 60px); line-height: 1.02;
-  letter-spacing: -0.005em; margin: 0 0 32px; max-width: 780px;
+  font-family: var(--font-display); font-weight: 800;
+  font-size: clamp(30px, 4.6vw, 54px); line-height: 1.08;
+  letter-spacing: -0.02em; margin: 0 0 32px; max-width: 780px;
 }
 .contact-headline .ital { color: var(--accent); }
 .contact-mail {
   display: inline-flex; align-items: baseline; gap: 10px; color: var(--accent);
-  font-family: var(--font-display); text-transform: lowercase; font-size: 24px;
+  font-family: var(--font-display); font-weight: 700; font-size: 22px;
   border-bottom: 1px solid var(--accent); padding-bottom: 4px;
   transition: gap 0.25s, transform 0.3s var(--ease);
   will-change: transform;
@@ -523,7 +523,7 @@ footer {
   margin-top: 28px;
   padding: 13px 24px;
   border: 1.5px solid var(--accent);
-  border-radius: 999px;
+  border-radius: 10px;
   color: var(--accent);
   font-family: var(--font-mono);
   font-size: 11px;
@@ -573,9 +573,9 @@ footer {
 .mob-menu.open { opacity: 1; transform: translateY(0); pointer-events: all; }
 .mob-menu a {
   font-family: var(--font-display);
-  text-transform: uppercase;
+  font-weight: 800;
   font-size: clamp(32px, 8vw, 52px);
-  letter-spacing: -0.005em;
+  letter-spacing: -0.02em;
   color: var(--ink);
   padding: 12px 0;
   border-bottom: 1px solid var(--rule);
