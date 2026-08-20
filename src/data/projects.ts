@@ -1,5 +1,5 @@
-export type ProjectColor = 'blue' | 'green' | 'amber' | 'violet'
-export type ProjectIllustration = 'ecommerce' | 'server' | 'aws' | 'research'
+export type ProjectColor = 'blue' | 'green' | 'amber' | 'violet' | 'rose'
+export type ProjectIllustration = 'ecommerce' | 'server' | 'aws' | 'research' | 'invoicing'
 
 export interface Project {
   id: string
@@ -76,5 +76,20 @@ export const projects: Project[] = [
     chips: ['Security', 'WordPress', 'Research', 'Attack-tree'],
     badge: 'Thesis · Grade 5',
     badgeSub: 'Haaga-Helia · Zone',
+  },
+  {
+    id: 'kevytlasku',
+    number: '[05]',
+    year: '2026',
+    color: 'rose',
+    illustration: 'invoicing',
+    title: 'kevytlasku',
+    description:
+      'A full-stack invoicing app for Finnish light entrepreneurs, built end to end: React frontend, a .NET 8 minimal API, and SQLite over Dapper. VAT totalled per rate, a useReducer-driven line-item editor, and a real deployed backend — not a mock.',
+    linkLabel: 'View live →',
+    linkHref: 'https://kevytlasku.vercel.app',
+    chips: ['React', '.NET 8', 'SQLite', 'REST API'],
+    badge: 'Full-stack',
+    badgeSub: 'Solo project',
   },
 ]

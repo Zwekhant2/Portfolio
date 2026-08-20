@@ -9,8 +9,9 @@ export const capabilities: CapabilityColumn[] = [
     items: [
       'HTML5, CSS3, PHP',
       'React & TypeScript',
+      '.NET 8 & C# (minimal APIs)',
       'WordPress (themes, plugins)',
-      'MySQL / MariaDB',
+      'MySQL / MariaDB / SQLite',
       'Site migration & security',
     ],
   },

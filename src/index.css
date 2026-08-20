@@ -383,6 +383,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .card-preview[data-color="green"]  { background: linear-gradient(145deg,#071f10 0%,#1a5c38 60%,#2E7D4F 100%); }
 .card-preview[data-color="amber"]  { background: linear-gradient(145deg,#1c0d00 0%,#7a3800 60%,#b85a00 100%); }
 .card-preview[data-color="violet"] { background: linear-gradient(145deg,#110a1f 0%,#3d1578 60%,#5e28a8 100%); }
+.card-preview[data-color="rose"]   { background: linear-gradient(145deg,#1a0a2e 0%,#6d28d9 55%,#db2777 100%); }
 .preview-num {
   position: absolute; top: 18px; left: 20px;
   font-family: var(--font-mono);

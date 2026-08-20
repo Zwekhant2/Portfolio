@@ -17,4 +17,6 @@ export const skills: string[] = [
   'Git',
   'Security',
   'React & TypeScript',
+  '.NET / C#',
+  'SQLite',
 ]
