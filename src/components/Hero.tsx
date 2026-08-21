@@ -17,12 +17,13 @@ export function Hero({ theme }: { theme: Theme }) {
   return (
     <div className="wrap">
       <section className="hero-v2">
-        <div className="hero-bg-photo" aria-hidden="true">
-          <img src={`${import.meta.env.BASE_URL}photo.jpg`} alt="" />
-        </div>
         <Suspense fallback={null}>
           <HeroCanvas theme={theme} />
         </Suspense>
+        <div className="hero-photo-wrap">
+          <div className="hero-photo-ring" aria-hidden="true" />
+          <img className="hero-v2-photo" src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Zwe Khant Lwin" />
+        </div>
         <div className="hero-v2-head">
           <p className="hero-v2-eyebrow fade fade-1">👋 Hei, I'm Zwe and I'm a</p>
           <div className="fade fade-1">

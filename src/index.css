@@ -370,27 +370,47 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 }
 .hero-v2-line2 { position: relative; display: flex; align-items: center; }
 
-/* Full-bleed backdrop, sitting behind the particle/wireframe canvas so
-   the geometry reads as tracing over a photo rather than beside one. */
-.hero-bg-photo {
+.hero-photo-wrap {
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(230px, 27vw, 380px);
+  aspect-ratio: 1 / 1;
+  z-index: 1;
+}
+.hero-photo-ring {
   position: absolute;
   inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid var(--accent);
+  opacity: 0.55;
   z-index: -1;
-  overflow: hidden;
+  animation: hero-ring-pulse 4s ease-in-out infinite;
 }
-.hero-bg-photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 72% 18%;
-  filter: grayscale(100%);
-  opacity: 0.16;
-}
-.hero-bg-photo::after {
+.hero-photo-ring::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: linear-gradient(100deg, var(--paper) 0%, var(--paper) 30%, transparent 72%);
+  inset: -16%;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 38%, transparent) 0%, transparent 68%);
+  z-index: -1;
+}
+@keyframes hero-ring-pulse {
+  0%, 100% { transform: scale(1); opacity: 0.55; }
+  50% { transform: scale(1.04); opacity: 0.8; }
+}
+.hero-v2-photo {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  transform: translateX(-50%);
+  width: 64%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: center 15%;
+  border-radius: 14px;
+  box-shadow: 0 20px 45px -18px rgba(0, 0, 0, 0.45);
 }
 
 .hero-v2-sub {
@@ -747,6 +767,9 @@ footer {
 @media (max-width: 860px) {
   .work-grid { grid-template-columns: 1fr; gap: 20px; }
 }
+@media (max-width: 900px) {
+  .hero-photo-wrap { display: none; }
+}
 @media (max-width: 680px) {
   .wrap { padding: 0 22px; }
   .strip-inner { padding: 10px 16px; gap: 10px; }
@@ -773,7 +796,7 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .fade  { opacity: 1; transform: none; animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .dot, .scroll-line::after, .marquee-track, .rotating-badge-svg { animation: none; }
+  .dot, .scroll-line::after, .marquee-track, .rotating-badge-svg, .hero-photo-ring { animation: none; }
   html { scroll-behavior: auto; }
   #intro { display: none; }
   .cursor-dot, .cursor-ring { display: none !important; }
