@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react'
 import { useCountUp } from '../hooks/useCountUp'
+import { useTilt } from '../hooks/useTilt'
 import { RotatingBadge } from './RotatingBadge'
 import type { Theme } from '../hooks/useTheme'
 
@@ -13,6 +14,11 @@ const TRUST = ['SpeedZone', 'Haaga-Helia', 'AWS Academy', 'Moodle']
 export function Hero({ theme }: { theme: Theme }) {
   const projectsCount = useCountUp(4, true)
   const yearsCount = useCountUp(2, true)
+  const {
+    ref: photoRef,
+    onMouseMove: onPhotoMove,
+    onMouseLeave: onPhotoLeave,
+  } = useTilt<HTMLDivElement>({ maxRotate: 10, liftZ: 24, baseTransform: ' translateY(-50%)' })
 
   return (
     <div className="wrap">
@@ -32,7 +38,15 @@ export function Hero({ theme }: { theme: Theme }) {
           <div className="hero-v2-line2">
             <h1 className="display-outline">&amp; designer</h1>
           </div>
-          <img className="hero-v2-photo" src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Zwe Khant Lwin" />
+          <div
+            ref={photoRef}
+            className="hero-photo-wrap"
+            onMouseMove={onPhotoMove}
+            onMouseLeave={onPhotoLeave}
+          >
+            <img className="hero-v2-photo" src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Zwe Khant Lwin" />
+            <div className="hero-photo-glare" aria-hidden="true" />
+          </div>
         </div>
 
         <p className="hero-v2-sub fade fade-3">
