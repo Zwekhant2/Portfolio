@@ -38,7 +38,7 @@ export default function App() {
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
       <main>
-        <Hero />
+        <Hero theme={theme} />
         <Marquee />
         <div className="wrap">
           <WorkSection />

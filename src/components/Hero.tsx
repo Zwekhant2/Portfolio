@@ -1,15 +1,25 @@
+import { lazy, Suspense } from 'react'
 import { useCountUp } from '../hooks/useCountUp'
 import { RotatingBadge } from './RotatingBadge'
+import type { Theme } from '../hooks/useTheme'
+
+// Three.js alone is ~700KB — code-split it into its own chunk so it loads
+// after the critical path instead of bloating the main bundle for a
+// decorative effect.
+const HeroCanvas = lazy(() => import('./HeroCanvas').then((m) => ({ default: m.HeroCanvas })))
 
 const TRUST = ['SpeedZone', 'Haaga-Helia', 'AWS Academy', 'Moodle']
 
-export function Hero() {
+export function Hero({ theme }: { theme: Theme }) {
   const projectsCount = useCountUp(4, true)
   const yearsCount = useCountUp(2, true)
 
   return (
     <div className="wrap">
       <section className="hero-v2">
+        <Suspense fallback={null}>
+          <HeroCanvas theme={theme} />
+        </Suspense>
         <div className="hero-v2-head">
           <p className="hero-v2-eyebrow fade fade-1">👋 Hei, I'm Zwe and I'm a</p>
           <div className="fade fade-1">

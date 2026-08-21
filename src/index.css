@@ -245,7 +245,27 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .reveal-d4 { transition-delay: 0.32s; }
 
 /* ─── Hero ──────────────────────────────────────────────────── */
-.hero-v2 { padding: 56px 0 72px; border-bottom: 1px solid var(--rule); }
+.hero-v2 { position: relative; padding: 56px 0 72px; border-bottom: 1px solid var(--rule); }
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+/* Every direct content block sits above the canvas — explicit stacking
+   rather than relying on DOM-order tie-breaking to get it right. */
+.hero-v2-head,
+.hero-v2-type,
+.hero-v2-sub,
+.hero-v2-stats,
+.hero-v2-ctas,
+.hero-v2-trust {
+  position: relative;
+  z-index: 1;
+}
 .hero-v2-head {
   display: flex; align-items: flex-start; justify-content: space-between;
   gap: 24px; margin-bottom: 4px;
