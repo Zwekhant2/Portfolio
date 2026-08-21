@@ -2,6 +2,7 @@ import type { Project } from '../data/projects'
 import { illustrationMap } from './illustrations'
 import { useTilt } from '../hooks/useTilt'
 import { useReveal } from '../hooks/useReveal'
+import { formatMonthYear, useGitHubStats } from '../hooks/useGitHubStats'
 
 interface ProjectCardProps {
   project: Project
@@ -12,6 +13,7 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
   const { ref: revealRef, visible } = useReveal<HTMLElement>()
   const { ref: tiltRef, onMouseMove, onMouseLeave } = useTilt<HTMLElement>()
   const Illustration = illustrationMap[project.illustration]
+  const ghStats = useGitHubStats(project.linkHref)
 
   function setRefs(el: HTMLElement | null) {
     revealRef.current = el
@@ -46,6 +48,11 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
           <div className="card-tags">
             <span className="meta-badge">{project.badge}</span>
             <span className="card-tag-sub">{project.badgeSub}</span>
+            {ghStats && (
+              <span className="gh-stat">
+                <span className="gh-stat-star">★</span> {ghStats.stars} · {formatMonthYear(ghStats.updatedAt)}
+              </span>
+            )}
           </div>
         </div>
         <h3>{project.title}</h3>

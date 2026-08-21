@@ -13,9 +13,10 @@ interface NavStripProps {
   onToggleTheme: () => void
   menuOpen: boolean
   onToggleMenu: () => void
+  onOpenCommandPalette: () => void
 }
 
-export function NavStrip({ theme, onToggleTheme, menuOpen, onToggleMenu }: NavStripProps) {
+export function NavStrip({ theme, onToggleTheme, menuOpen, onToggleMenu, onOpenCommandPalette }: NavStripProps) {
   const active = useActiveSection([...NAV_ITEMS.map((item) => item.id), 'contact'])
 
   return (
@@ -37,6 +38,9 @@ export function NavStrip({ theme, onToggleTheme, menuOpen, onToggleMenu }: NavSt
           </ul>
         </nav>
         <div className="strip-right">
+          <button className="cmdk-trigger" onClick={onOpenCommandPalette} aria-label="Open command palette">
+            Search <kbd>⌘K</kbd>
+          </button>
           <button className="theme-toggle" onClick={onToggleTheme} aria-label="Toggle colour theme">
             {theme === 'dark' ? 'Light' : 'Dark'}
           </button>

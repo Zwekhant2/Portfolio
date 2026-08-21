@@ -6,6 +6,7 @@ import { ProgressBar } from './components/ProgressBar'
 import { CustomCursor } from './components/CustomCursor'
 import { NavStrip } from './components/NavStrip'
 import { MobileMenu } from './components/MobileMenu'
+import { CommandPalette } from './components/CommandPalette'
 import { Hero } from './components/Hero'
 import { Marquee } from './components/Marquee'
 import { WorkSection } from './components/WorkSection'
@@ -18,10 +19,11 @@ import { Footer } from './components/Footer'
 export default function App() {
   const { theme, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
+  const [cmdkOpen, setCmdkOpen] = useState(false)
 
   useEffect(() => {
-    document.body.style.overflow = menuOpen ? 'hidden' : ''
-  }, [menuOpen])
+    document.body.style.overflow = menuOpen || cmdkOpen ? 'hidden' : ''
+  }, [menuOpen, cmdkOpen])
 
   return (
     <>
@@ -34,8 +36,21 @@ export default function App() {
         onToggleTheme={toggleTheme}
         menuOpen={menuOpen}
         onToggleMenu={() => setMenuOpen((v) => !v)}
+        onOpenCommandPalette={() => {
+          setMenuOpen(false)
+          setCmdkOpen(true)
+        }}
       />
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
+      <CommandPalette
+        open={cmdkOpen}
+        onOpen={() => {
+          setMenuOpen(false)
+          setCmdkOpen(true)
+        }}
+        onClose={() => setCmdkOpen(false)}
+        onToggleTheme={toggleTheme}
+      />
 
       <main>
         <Hero theme={theme} />
