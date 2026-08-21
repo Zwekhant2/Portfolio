@@ -39,22 +39,20 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
         </div>
       </div>
       <div className="card-body">
-        <div className="card-num">
-          {project.number} · {project.year}
+        <div className="card-body-top">
+          <span className="card-num">
+            {project.number} · {project.year}
+          </span>
+          <div className="card-tags">
+            <span className="meta-badge">{project.badge}</span>
+            <span className="card-tag-sub">{project.badgeSub}</span>
+          </div>
         </div>
         <h3>{project.title}</h3>
         <p>{project.description}</p>
         <a className="card-link" href={project.linkHref} target="_blank" rel="noopener">
           {project.linkLabel}
         </a>
-      </div>
-      <div className="card-meta">
-        <div>
-          <div className="meta-badge">{project.badge}</div>
-          <br />
-          {project.badgeSub}
-        </div>
-        <span>{project.year}</span>
       </div>
     </article>
   )
