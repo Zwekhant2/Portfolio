@@ -22,7 +22,11 @@ export function Hero({ theme }: { theme: Theme }) {
         </Suspense>
         <div className="hero-photo-wrap">
           <div className="hero-photo-ring" aria-hidden="true" />
-          <img className="hero-v2-photo" src={`${import.meta.env.BASE_URL}photo.jpg`} alt="Zwe Khant Lwin" />
+          <img
+            className="hero-v2-photo"
+            src={`${import.meta.env.BASE_URL}photo-cutout.webp`}
+            alt="Zwe Khant Lwin"
+          />
         </div>
         <div className="hero-v2-head">
           <p className="hero-v2-eyebrow fade fade-1">👋 Hei, I'm Zwe and I'm a</p>

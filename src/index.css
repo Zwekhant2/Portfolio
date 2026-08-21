@@ -372,10 +372,10 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 
 .hero-photo-wrap {
   position: absolute;
-  right: 4%;
+  right: 3%;
   top: 50%;
   transform: translateY(-50%);
-  width: clamp(230px, 27vw, 380px);
+  width: clamp(280px, 32vw, 460px);
   aspect-ratio: 1 / 1;
   z-index: 1;
 }
@@ -403,14 +403,13 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 .hero-v2-photo {
   position: absolute;
   left: 50%;
-  bottom: 4%;
+  bottom: -6%;
   transform: translateX(-50%);
-  width: 64%;
-  aspect-ratio: 3 / 4;
-  object-fit: cover;
-  object-position: center 15%;
-  border-radius: 14px;
-  box-shadow: 0 20px 45px -18px rgba(0, 0, 0, 0.45);
+  width: 96%;
+  height: 112%;
+  object-fit: contain;
+  object-position: bottom center;
+  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.4));
 }
 
 .hero-v2-sub {
