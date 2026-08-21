@@ -369,56 +369,29 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   color: var(--accent);
 }
 .hero-v2-line2 { position: relative; display: flex; align-items: center; }
-.hero-photo-wrap {
+
+/* Full-bleed backdrop, sitting behind the particle/wireframe canvas so
+   the geometry reads as tracing over a photo rather than beside one. */
+.hero-bg-photo {
   position: absolute;
-  right: 6%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: clamp(110px, 14vw, 200px);
-  aspect-ratio: 3 / 4;
-  border-radius: 6px;
-  box-shadow: calc(var(--tilt-x, 0) * -26px) calc(18px + var(--tilt-y, 0) * -20px) 40px -18px rgba(0, 0, 0, 0.4);
-  transition: box-shadow 0.3s var(--ease);
-  z-index: 2;
-}
-.hero-photo-wrap::before {
-  content: '';
-  position: absolute;
-  inset: -6px;
-  border-radius: 10px;
-  background: linear-gradient(135deg, var(--accent), transparent 65%);
-  filter: blur(14px);
-  opacity: 0;
+  inset: 0;
   z-index: -1;
-  transition: opacity 0.35s var(--ease);
+  overflow: hidden;
 }
-.hero-photo-wrap:hover::before { opacity: 0.55; }
-.hero-v2-photo {
-  display: block;
+.hero-bg-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 15%;
+  object-position: 72% 18%;
   filter: grayscale(100%);
-  border-radius: 6px;
-  transition: filter 0.4s;
+  opacity: 0.16;
 }
-.hero-photo-wrap:hover .hero-v2-photo { filter: grayscale(0%); }
-.hero-photo-glare {
+.hero-bg-photo::after {
+  content: '';
   position: absolute;
   inset: 0;
-  border-radius: 6px;
-  background: radial-gradient(
-    circle at calc(50% + var(--tilt-x, 0) * 60%) calc(50% + var(--tilt-y, 0) * 60%),
-    rgba(255, 255, 255, 0.35),
-    transparent 55%
-  );
-  opacity: 0;
-  transition: opacity 0.3s var(--ease);
-  pointer-events: none;
-  mix-blend-mode: overlay;
+  background: linear-gradient(100deg, var(--paper) 0%, var(--paper) 30%, transparent 72%);
 }
-.hero-photo-wrap:hover .hero-photo-glare { opacity: 1; }
 
 .hero-v2-sub {
   font-size: 17px; max-width: 620px; color: var(--ink-2);
@@ -773,9 +746,6 @@ footer {
 
 @media (max-width: 860px) {
   .work-grid { grid-template-columns: 1fr; gap: 20px; }
-}
-@media (max-width: 900px) {
-  .hero-photo-wrap { display: none; }
 }
 @media (max-width: 680px) {
   .wrap { padding: 0 22px; }
