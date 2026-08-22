@@ -293,6 +293,16 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   display: flex; align-items: center; justify-content: center;
   width: 84px; height: 84px; flex-shrink: 0;
 }
+.rotating-badge::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--paper) 65%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  z-index: -1;
+}
 .rotating-badge-svg {
   width: 100%; height: 100%;
   animation: badge-spin 14s linear infinite;
@@ -372,44 +382,26 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
 
 .hero-photo-wrap {
   position: absolute;
-  right: 3%;
-  top: 50%;
-  transform: translateY(-50%);
-  width: clamp(280px, 32vw, 460px);
-  aspect-ratio: 1 / 1;
-  z-index: 1;
-}
-.hero-photo-ring {
-  position: absolute;
-  inset: 0;
-  border-radius: 50%;
-  border: 1.5px solid var(--accent);
-  opacity: 0.55;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 46%;
+  overflow: hidden;
   z-index: -1;
-  animation: hero-ring-pulse 4s ease-in-out infinite;
 }
-.hero-photo-ring::before {
+.hero-photo-wrap::before {
   content: '';
   position: absolute;
-  inset: -16%;
-  border-radius: 50%;
-  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 38%, transparent) 0%, transparent 68%);
-  z-index: -1;
-}
-@keyframes hero-ring-pulse {
-  0%, 100% { transform: scale(1); opacity: 0.55; }
-  50% { transform: scale(1.04); opacity: 0.8; }
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(100deg, var(--paper) 0%, var(--paper) 8%, transparent 42%);
 }
 .hero-v2-photo {
-  position: absolute;
-  left: 50%;
-  bottom: -6%;
-  transform: translateX(-50%);
-  width: 96%;
-  height: 112%;
-  object-fit: contain;
-  object-position: bottom center;
-  filter: drop-shadow(0 24px 30px rgba(0, 0, 0, 0.4));
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
 }
 
 .hero-v2-sub {
@@ -795,7 +787,7 @@ footer {
 @media (prefers-reduced-motion: reduce) {
   .fade  { opacity: 1; transform: none; animation: none; }
   .reveal { opacity: 1; transform: none; transition: none; }
-  .dot, .scroll-line::after, .marquee-track, .rotating-badge-svg, .hero-photo-ring { animation: none; }
+  .dot, .scroll-line::after, .marquee-track, .rotating-badge-svg { animation: none; }
   html { scroll-behavior: auto; }
   #intro { display: none; }
   .cursor-dot, .cursor-ring { display: none !important; }
