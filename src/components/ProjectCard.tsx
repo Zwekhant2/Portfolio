@@ -2,6 +2,7 @@ import type { Project } from '../data/projects'
 import { illustrationMap } from './illustrations'
 import { useTilt } from '../hooks/useTilt'
 import { useReveal } from '../hooks/useReveal'
+import { useViewTransitionName } from '../hooks/useViewTransitionName'
 import { formatMonthYear, useGitHubStats } from '../hooks/useGitHubStats'
 
 interface ProjectCardProps {
@@ -12,8 +13,11 @@ interface ProjectCardProps {
 export function ProjectCard({ project, delay }: ProjectCardProps) {
   const { ref: revealRef, visible } = useReveal<HTMLElement>()
   const { ref: tiltRef, onMouseMove, onMouseLeave } = useTilt<HTMLElement>()
+  const previewRef = useViewTransitionName<HTMLDivElement>(`card-preview-${project.id}`)
+  const titleRef = useViewTransitionName<HTMLHeadingElement>(`card-title-${project.id}`)
   const Illustration = illustrationMap[project.illustration]
   const ghStats = useGitHubStats(project.linkHref)
+  const caseStudyHref = `#/work/${project.id}`
 
   function setRefs(el: HTMLElement | null) {
     revealRef.current = el
@@ -27,19 +31,21 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
-      <div className="card-preview" data-color={project.color}>
-        <span className="preview-num">{project.number}</span>
-        <div className="card-illustration">
-          <Illustration />
+      <a className="card-preview-link" href={caseStudyHref} aria-label={`Read the ${project.title} case study`}>
+        <div ref={previewRef} className="card-preview" data-color={project.color}>
+          <span className="preview-num">{project.number}</span>
+          <div className="card-illustration">
+            <Illustration />
+          </div>
+          <div className="preview-chips">
+            {project.chips.map((chip) => (
+              <span className="chip" key={chip}>
+                {chip}
+              </span>
+            ))}
+          </div>
         </div>
-        <div className="preview-chips">
-          {project.chips.map((chip) => (
-            <span className="chip" key={chip}>
-              {chip}
-            </span>
-          ))}
-        </div>
-      </div>
+      </a>
       <div className="card-body">
         <div className="card-body-top">
           <span className="card-num">
@@ -55,7 +61,11 @@ export function ProjectCard({ project, delay }: ProjectCardProps) {
             )}
           </div>
         </div>
-        <h3>{project.title}</h3>
+        <h3 ref={titleRef}>
+          <a className="card-title-link" href={caseStudyHref}>
+            {project.title}
+          </a>
+        </h3>
         <p>{project.description}</p>
         <a className="card-link" href={project.linkHref} target="_blank" rel="noopener">
           {project.linkLabel}

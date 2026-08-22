@@ -1,5 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTheme } from './hooks/useTheme'
+import { useHashRoute } from './hooks/useHashRoute'
+import { projects } from './data/projects'
 import { IntroLoader } from './components/IntroLoader'
 import { Background } from './components/Background'
 import { ProgressBar } from './components/ProgressBar'
@@ -15,15 +17,30 @@ import { Capabilities } from './components/Capabilities'
 import { Credentials } from './components/Credentials'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
+import { ProjectDetail } from './components/ProjectDetail'
+
+const SITE_TITLE = 'Zwe Khant Lwin — Web Developer & Designer'
 
 export default function App() {
   const { theme, toggleTheme } = useTheme()
   const [menuOpen, setMenuOpen] = useState(false)
   const [cmdkOpen, setCmdkOpen] = useState(false)
+  const route = useHashRoute()
+  const activeProject = projects.find((p) => p.id === route.replace(/^\/work\//, '')) ?? null
 
   useEffect(() => {
     document.body.style.overflow = menuOpen || cmdkOpen ? 'hidden' : ''
   }, [menuOpen, cmdkOpen])
+
+  useEffect(() => {
+    document.title = activeProject ? `${activeProject.title} — Zwe Khant Lwin` : SITE_TITLE
+  }, [activeProject])
+
+  useEffect(() => {
+    if (!activeProject && route) {
+      document.getElementById(route)?.scrollIntoView()
+    }
+  }, [route, activeProject])
 
   return (
     <>
@@ -53,15 +70,21 @@ export default function App() {
       />
 
       <main>
-        <Hero theme={theme} />
-        <Marquee />
-        <div className="wrap">
-          <WorkSection />
-          <NowSection />
-          <Capabilities />
-          <Credentials />
-          <Contact />
-        </div>
+        {activeProject ? (
+          <ProjectDetail project={activeProject} />
+        ) : (
+          <>
+            <Hero theme={theme} />
+            <Marquee />
+            <div className="wrap">
+              <WorkSection />
+              <NowSection />
+              <Capabilities />
+              <Credentials />
+              <Contact />
+            </div>
+          </>
+        )}
       </main>
 
       <Footer />

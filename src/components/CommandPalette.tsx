@@ -35,8 +35,7 @@ export function CommandPalette({ open, onOpen, onClose, onToggleTheme }: Command
       label: project.title,
       hint: 'Project',
       run: () => {
-        document.getElementById('work')?.scrollIntoView({ behavior: 'smooth' })
-        window.open(project.linkHref, '_blank', 'noopener')
+        window.location.hash = `/work/${project.id}`
       },
     }))
 
