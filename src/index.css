@@ -385,7 +385,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   right: 0;
   top: 0;
   bottom: 0;
-  width: 46%;
+  width: 32%;
   overflow: hidden;
   z-index: -1;
 }
@@ -394,7 +394,7 @@ a:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; border-
   position: absolute;
   inset: 0;
   z-index: 1;
-  background: linear-gradient(100deg, var(--paper) 0%, var(--paper) 8%, transparent 42%);
+  background: linear-gradient(100deg, var(--paper) 0%, var(--paper) 10%, transparent 55%);
 }
 .hero-v2-photo {
   display: block;
