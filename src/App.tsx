@@ -6,13 +6,14 @@ import { NavStrip } from './components/NavStrip'
 import { MobileMenu } from './components/MobileMenu'
 import { Hero } from './components/Hero'
 import { WorkSection } from './components/WorkSection'
+import { NowSection } from './components/NowSection'
 import { Capabilities } from './components/Capabilities'
 import { Credentials } from './components/Credentials'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { ProjectDetail } from './components/ProjectDetail'
 
-const SITE_TITLE = 'Zwe Khant Lwin — Web Developer & Designer'
+const SITE_TITLE = 'Zwe Khant Lwin — Full-Stack & Cloud Developer'
 
 export default function App() {
   const { theme, toggleTheme } = useTheme()
@@ -55,6 +56,7 @@ export default function App() {
             <Hero />
             <div className="wrap">
               <WorkSection />
+              <NowSection />
               <Capabilities />
               <Credentials />
               <Contact />

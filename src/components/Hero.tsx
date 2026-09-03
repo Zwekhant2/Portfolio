@@ -1,4 +1,11 @@
+import { projects } from '../data/projects'
+import { useCountUp } from '../hooks/useCountUp'
+
 export function Hero() {
+  // Derived, not hardcoded: the counter tracks the work index and cannot drift.
+  const projectsCount = useCountUp(projects.length, true)
+  const yearsCount = useCountUp(2, true)
+
   return (
     <div className="wrap">
       <section className="hero">
@@ -10,17 +17,30 @@ export function Hero() {
           </h1>
 
           <p className="hero-lede">
-            Most of my work sits on the seam between those two things: a WordPress site that needs
-            migrating without losing a page, a learning platform that needs a network designed
-            around it, an invoicing app that needs a backend that actually exists. I finished a BBA
-            in Business Information Technology at Haaga-Helia in 2026, wrote a thesis on WordPress
-            security that was graded 5/5, and spent a traineeship at SpeedZone (Zone Media OY)
-            doing client migrations and maintenance.
+            I build web applications with React, TypeScript and C# / .NET, and run them on AWS
+            infrastructure I write as code. BBA in Business Information Technology from
+            Haaga-Helia, majoring in ICT Infrastructures and Cloud Services.
           </p>
 
           <p className="hero-lede">
-            Below are five projects, written up properly — including the parts that went wrong.
+            Below are {projects.length} projects, written up properly — including the parts that
+            went wrong.
           </p>
+
+          <dl className="hero-stats">
+            <div>
+              <dt>Projects</dt>
+              <dd>{projectsCount}</dd>
+            </div>
+            <div>
+              <dt>Thesis grade</dt>
+              <dd>5 / 5</dd>
+            </div>
+            <div>
+              <dt>Years coding</dt>
+              <dd>{yearsCount}+</dd>
+            </div>
+          </dl>
 
           <div className="hero-actions">
             <a className="link-underline" href="#work">

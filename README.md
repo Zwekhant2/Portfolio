@@ -1,6 +1,6 @@
 # Portfolio — Zwe Khant Lwin
 
-Personal portfolio site for **Zwe Khant Lwin** — web developer and designer based in Helsinki.
+Personal portfolio site for **Zwe Khant Lwin** — full-stack & cloud developer based in Helsinki.
 
 ## About
 

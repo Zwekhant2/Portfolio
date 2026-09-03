@@ -99,16 +99,17 @@ export const projects: Project[] = [
     year: '2026',
     title: 'kevytlasku',
     standfirst:
-      'An invoicing app for Finnish light entrepreneurs, with a real backend behind it — not a mock.',
+      'A full-stack invoicing app for Finnish light entrepreneurs — live in production, with a real backend behind it rather than a mock.',
     role: 'Solo — frontend, backend, deployment',
     context: 'Self-directed',
     illustration: 'invoicing',
-    stack: ['React', '.NET 8', 'SQLite', 'Dapper', 'REST'],
+    stack: ['React 19', 'TypeScript', 'C# / .NET 8', 'SQLite', 'Dapper', 'Docker', 'Fly.io'],
     facts: [
-      { label: 'Frontend', value: 'React' },
-      { label: 'API', value: '.NET 8 minimal API' },
+      { label: 'Frontend', value: 'React 19 + TypeScript, on Vercel' },
+      { label: 'API', value: 'C# / .NET 8 minimal API' },
       { label: 'Data', value: 'SQLite via Dapper' },
-      { label: 'Status', value: 'Deployed' },
+      { label: 'Hosting', value: 'Multi-stage Docker on Fly.io' },
+      { label: 'Status', value: 'Live in production' },
     ],
     sections: [
       {
@@ -123,6 +124,7 @@ export const projects: Project[] = [
         body: [
           'A single invoice can carry lines at different VAT rates. So the total is not one calculation — it is a set of subtotals grouped by rate, each rounded correctly, then summed.',
           'Getting this wrong is the kind of bug that does not crash anything. It quietly produces a number that is incorrect, which on an invoice is worse than a crash.',
+          'So the totalling lives in one module with no dependencies and a test suite of its own. Isolating it that way means the arithmetic can be proved correct on its own terms, without standing a server up or rendering a component to check it.',
         ],
       },
       {
@@ -135,11 +137,18 @@ export const projects: Project[] = [
       {
         heading: 'A real backend',
         body: [
-          'The API is a .NET 8 minimal API talking to SQLite through Dapper, and it is deployed and running rather than stubbed behind a mock.',
+          'The API is a C# / .NET 8 minimal API talking to SQLite through Dapper, and it is deployed and running rather than stubbed behind a mock.',
           'That distinction matters more than it sounds. A frontend against a mock never has to answer for latency, for error states, for a request that fails halfway. A deployed backend makes all of those real, and all of them have to be handled.',
           // TODO(zwe): a paragraph here on the hardest thing deployment actually threw at you —
           // CORS, cold starts, the SQLite file on a read-only filesystem, whatever it was.
           // Specifics beat generalities.
+        ],
+      },
+      {
+        heading: 'Shipping it',
+        body: [
+          'The API ships as a multi-stage Docker build — the .NET SDK compiles and publishes in the first stage, and only the runtime image and the published output survive into the second. The image that actually runs carries no compiler and no source.',
+          'That image runs on Fly.io, with the React front end deployed separately on Vercel. Splitting them means the two halves scale and redeploy independently, and the frontend is served from a CDN rather than from the same box answering API calls.',
         ],
       },
     ],
@@ -199,14 +208,15 @@ export const projects: Project[] = [
   {
     id: 'wp-security-thesis',
     year: '2026',
-    title: 'Which WordPress security plugin actually helps?',
+    title: 'WordPress Security: Comparison of Security Plugins and Implementation Guide',
     standfirst:
-      'A BBA thesis built on attack-tree analysis and real post-compromise cleanup. Graded 5/5.',
+      'A BBA thesis commissioned by SpeedZone.fi, built on attack-tree analysis and real post-compromise cleanup. Graded 5/5.',
     role: 'Author',
-    context: 'Haaga-Helia, with expert input from Zone.eu and Patchstack',
+    context: 'Haaga-Helia BBA thesis, commissioned by SpeedZone.fi',
     illustration: 'research',
     stack: ['Security research', 'WordPress', 'Attack-tree analysis'],
     facts: [
+      { label: 'Commissioned by', value: 'SpeedZone.fi' },
       { label: 'Grade', value: '5 / 5' },
       { label: 'Method', value: 'Attack-tree analysis' },
       { label: 'Expert input', value: 'Peeter Marvet (Zone.eu), Patchstack' },
@@ -216,6 +226,7 @@ export const projects: Project[] = [
       {
         heading: 'The question',
         body: [
+          'The thesis was commissioned by SpeedZone.fi, who maintain WordPress sites for clients and needed a defensible answer to which security plugin to standardise on.',
           'Every WordPress security plugin claims to secure WordPress. They cannot all be equally right, and comparing their marketing pages tells you nothing — the feature lists are near-identical, and the differences that matter are not on them.',
           'So the thesis asks a narrower, more answerable question: against which attacks does each of these plugins actually help, and where does each one stop?',
         ],

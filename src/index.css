@@ -155,6 +155,30 @@ img { max-width: 100%; display: block; }
   font-family: var(--font-meta);
   font-size: 14px;
 }
+.hero-stats {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  margin: 32px 0 0;
+  padding-top: 24px;
+  border-top: 1px solid var(--rule);
+}
+.hero-stats > div { display: flex; flex-direction: column-reverse; gap: 6px; }
+.hero-stats dt {
+  font-family: var(--font-meta);
+  font-size: 13px;
+  color: var(--muted);
+}
+.hero-stats dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1;
+  color: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+
 .link-underline {
   color: var(--ink);
   border-bottom: 1px solid var(--accent);
@@ -404,6 +428,30 @@ img { max-width: 100%; display: block; }
 }
 .cap-col li:hover .cap-pip { background: var(--accent); }
 
+/* ─── Now ───────────────────────────────────────────────────── */
+.now-grid {
+  display: grid;
+  grid-template-columns: 130px 1fr;
+  gap: 0 32px;
+  margin: 0;
+  border-top: 1px solid var(--rule);
+}
+.now-grid dt {
+  font-family: var(--font-meta);
+  font-size: 13px;
+  color: var(--muted);
+  padding: 18px 0 0;
+}
+.now-grid dd {
+  margin: 0;
+  padding: 18px 0;
+  color: var(--ink-2);
+  max-width: var(--measure);
+  border-bottom: 1px solid var(--rule);
+}
+.now-grid dt + dd { grid-column: 2; }
+.now-grid em { font-style: italic; color: var(--ink); }
+
 /* ─── Credentials ───────────────────────────────────────────── */
 .credentials-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; }
 .credentials-heading {
@@ -413,6 +461,7 @@ img { max-width: 100%; display: block; }
   margin: 0 0 16px;
 }
 .credentials-list { border-top: 1px solid var(--rule); }
+.credentials-heading--stacked { margin-top: 36px; }
 .credentials-row {
   display: flex; justify-content: space-between; align-items: flex-start; gap: 20px;
   padding: 14px 0;
@@ -551,6 +600,9 @@ footer {
   .case-next-year { grid-row: auto; }
   .cap-grid { grid-template-columns: 1fr; gap: 32px; }
   .credentials-grid { grid-template-columns: 1fr; gap: 36px; }
+  .now-grid { grid-template-columns: 1fr; }
+  .now-grid dt { padding-bottom: 4px; }
+  .now-grid dt + dd { grid-column: 1; }
   .case-facts dl { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {

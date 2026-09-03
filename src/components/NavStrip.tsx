@@ -3,6 +3,7 @@ import type { Theme } from '../hooks/useTheme'
 
 const NAV_ITEMS = [
   { id: 'work', label: 'Work' },
+  { id: 'now', label: 'Now' },
   { id: 'capabilities', label: 'Skills' },
   { id: 'certifications', label: 'Credentials' },
   { id: 'contact', label: 'Contact' },
