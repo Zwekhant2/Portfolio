@@ -8,7 +8,9 @@ Web development trainee at SpeedZone (Zone Media OY), BBA graduate in Business I
 
 ## Stack
 
-React 19 + TypeScript, built with Vite. No CSS framework — hand-written CSS with theme tokens, custom hooks for scroll reveal, cursor, tilt, count-up, and text-scramble effects (ported from the original vanilla-JS build). Type: Fraunces, Inter, JetBrains Mono via Google Fonts.
+React 19 + TypeScript, built with Vite. No CSS framework and no UI dependencies — hand-written CSS with theme tokens, and a small set of hooks for theme, hash routing, scroll reveal, and View Transitions.
+
+The design is editorial: one serif (Newsreader) carries both display and body text, the system sans stack is used only for meta, and a single accent colour does the rest. Each project is a written case study rather than a card.
 
 ## Local development
 
@@ -32,12 +34,12 @@ npm run preview    # serve the production build locally
 
 ```
 src/
-  data/         project, skill, capability, and credential content
-  hooks/        theme, scroll-reveal, cursor, tilt, count-up, scramble
+  data/         project case studies, capabilities, credentials
+  hooks/        theme, hash routing, scroll reveal, view transitions
   components/   one component per section (Hero, WorkSection, Contact, ...)
 ```
 
-Project cards, skills marquee, capabilities, and credentials are all data-driven — edit the files under `src/data/` rather than the components to update content.
+All content is data-driven — edit the files under `src/data/` rather than the components. Each entry in `projects.ts` carries its full case study: a standfirst, a facts table, and the prose sections rendered on `#/work/<id>`.
 
 ## Deployment
 
