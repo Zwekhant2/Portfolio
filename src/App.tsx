@@ -37,7 +37,6 @@ export default function App() {
 
   return (
     <>
-      <div className="grain" aria-hidden="true"></div>
       <NavStrip
         theme={theme}
         onToggleTheme={toggleTheme}
@@ -48,13 +47,13 @@ export default function App() {
 
       <main>
         {activeProject ? (
-          <div className="wrap">
+          <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
             <ProjectDetail project={activeProject} />
           </div>
         ) : (
           <>
             <Hero />
-            <div className="wrap">
+            <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
               <WorkSection />
               <NowSection />
               <Capabilities />

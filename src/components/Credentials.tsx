@@ -3,18 +3,37 @@ import type { Certification } from '../data/credentials'
 import { useReveal } from '../hooks/useReveal'
 import { SectionHeading } from './SectionHeading'
 
-function CredentialList({ items }: { items: Certification[] }) {
+function CredentialCard({
+  heading,
+  items,
+  delay,
+}: {
+  heading: string
+  items: Certification[]
+  delay: 1 | 2
+}) {
+  const { ref, visible } = useReveal<HTMLDivElement>()
+
   return (
-    <div className="credentials-list">
-      {items.map((item) => (
-        <div className="credentials-row" key={item.name}>
-          <div>
-            <div className="cred-cert-name">{item.name}</div>
-            <div className="cred-cert-sub">{item.issuer}</div>
-          </div>
-          <div className="cred-cert-year">{item.year}</div>
-        </div>
-      ))}
+    <div
+      ref={ref}
+      className={`reveal reveal-d${delay} rounded-2xl border border-line bg-surface p-6 shadow-card${
+        visible ? ' visible' : ''
+      }`}
+    >
+      <h3 className="text-sm font-semibold tracking-[0.12em] text-fg-3 uppercase">{heading}</h3>
+      <ul className="mt-5 space-y-5">
+        {items.map((item) => (
+          <li key={item.name} className="flex gap-4">
+            <span className="mt-1.5 size-2 shrink-0 rounded-full bg-gradient-to-br from-brand to-brand-2" />
+            <div className="min-w-0 flex-1">
+              <p className="font-medium text-balance">{item.name}</p>
+              <p className="mt-1 text-sm leading-relaxed text-fg-2">{item.issuer}</p>
+            </div>
+            <span className="shrink-0 text-sm font-medium text-fg-3 tabular-nums">{item.year}</span>
+          </li>
+        ))}
+      </ul>
     </div>
   )
 }
@@ -23,30 +42,33 @@ export function Credentials() {
   const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
-    <section className="section" id="certifications">
+    <section className="scroll-mt-24 py-20 sm:py-28" id="certifications">
       <SectionHeading
-        eyebrow="Credentials · education, certifications & languages"
-        title="Credentials"
+        eyebrow="Credentials"
+        title="Education, certifications & languages"
       />
-      <div ref={ref} className={`credentials-grid reveal reveal-d1${visible ? ' visible' : ''}`}>
-        <div>
-          <h4 className="credentials-heading">Education</h4>
-          <CredentialList items={education} />
 
-          <h4 className="credentials-heading credentials-heading--stacked">Certifications</h4>
-          <CredentialList items={certifications} />
+      <div className="mt-14 grid gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2 grid gap-6 sm:grid-cols-2">
+          <CredentialCard heading="Education" items={education} delay={1} />
+          <CredentialCard heading="Certifications" items={certifications} delay={2} />
         </div>
 
-        <div>
-          <h4 className="credentials-heading">Languages</h4>
-          <div className="credentials-list">
+        <div
+          ref={ref}
+          className={`reveal reveal-d3 rounded-2xl border border-line bg-surface p-6 shadow-card${
+            visible ? ' visible' : ''
+          }`}
+        >
+          <h3 className="text-sm font-semibold tracking-[0.12em] text-fg-3 uppercase">Languages</h3>
+          <ul className="mt-5 space-y-4">
             {languages.map((lang) => (
-              <div className="credentials-row credentials-row--tight" key={lang.name}>
-                <span className="cred-lang-name">{lang.name}</span>
-                <span className="cred-lang-level">{lang.level}</span>
-              </div>
+              <li key={lang.name} className="flex items-baseline justify-between gap-4">
+                <span className="font-medium">{lang.name}</span>
+                <span className="text-sm text-fg-2">{lang.level}</span>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     </section>
