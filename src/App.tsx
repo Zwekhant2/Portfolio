@@ -38,9 +38,7 @@ export default function App() {
 
   return (
     <>
-      <div className="bg-field" aria-hidden="true" />
-      <div className="bg-orb bg-orb-1" aria-hidden="true" />
-      <div className="bg-orb bg-orb-2" aria-hidden="true" />
+      <div className="grid-field" aria-hidden="true" />
       <ScrollProgress />
       <NavStrip
         theme={theme}
@@ -50,21 +48,17 @@ export default function App() {
       />
       <MobileMenu open={menuOpen} onClose={() => setMenuOpen(false)} />
 
-      <main>
+      <main className="mx-auto w-full max-w-6xl px-6 sm:px-8">
         {activeProject ? (
-          <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
-            <ProjectDetail project={activeProject} />
-          </div>
+          <ProjectDetail project={activeProject} />
         ) : (
           <>
             <Hero />
-            <div className="mx-auto w-full max-w-6xl px-6 sm:px-8">
-              <WorkSection />
-              <NowSection />
-              <Capabilities />
-              <Credentials />
-              <Contact />
-            </div>
+            <WorkSection />
+            <NowSection />
+            <Capabilities />
+            <Credentials />
+            <Contact />
           </>
         )}
       </main>

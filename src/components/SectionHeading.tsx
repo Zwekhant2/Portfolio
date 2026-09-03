@@ -10,10 +10,14 @@ export function SectionHeading({ eyebrow, title, lede }: SectionHeadingProps) {
   const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
-    <div ref={ref} className={`reveal mx-auto max-w-2xl text-center${visible ? ' visible' : ''}`}>
-      <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">{eyebrow}</p>
-      <h2 className="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">{title}</h2>
-      {lede ? <p className="mt-4 text-base leading-relaxed text-fg-2">{lede}</p> : null}
+    <div ref={ref} className={`reveal${visible ? ' visible' : ''}`}>
+      <p className="label">
+        <span className="text-accent">/</span> {eyebrow}
+      </p>
+      <h2 className="mt-4 max-w-2xl text-2xl font-semibold tracking-tight text-balance sm:text-3xl">
+        {title}
+      </h2>
+      {lede ? <p className="mt-3 max-w-2xl leading-relaxed text-fg-2">{lede}</p> : null}
     </div>
   )
 }

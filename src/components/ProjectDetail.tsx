@@ -9,105 +9,102 @@ export function ProjectDetail({ project }: { project: Project }) {
   const others = projects.filter((p) => p.id !== project.id)
 
   const facts = [
-    { label: 'Role', value: project.role },
-    ...project.facts,
-    { label: 'Built with', value: project.stack.join(', ') },
+    { label: 'role', value: project.role },
+    ...project.facts.map((f) => ({ label: f.label.toLowerCase(), value: f.value })),
+    { label: 'built with', value: project.stack.join(', ') },
   ]
 
   return (
-    <article className="py-12 sm:py-16">
+    <article className="py-12">
       <a
-        className="inline-flex items-center gap-2 text-sm font-medium text-fg-2 transition-colors hover:text-brand"
+        className="font-mono text-sm text-fg-3 transition-colors hover:text-accent"
         href="#work"
       >
-        <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-          <path d="M19 12H5M11 18l-6-6 6-6" />
-        </svg>
-        Back to work
+        ← back to index
       </a>
 
-      <header className="mt-8 max-w-3xl">
-        <p className="flex flex-wrap items-center gap-x-2 text-sm text-fg-3">
-          <span>{project.context}</span>
-          <span aria-hidden="true">·</span>
-          <span>{project.year}</span>
+      <header className="mt-10 border-b border-line pb-10">
+        <p className="label">
+          {project.context} · {project.year}
         </p>
         <h1
           ref={titleRef}
-          className="mt-3 text-3xl font-extrabold tracking-tight text-balance sm:text-4xl lg:text-5xl"
+          className="mt-4 max-w-3xl text-3xl leading-[1.12] font-semibold tracking-tight text-balance sm:text-4xl"
         >
           {project.title}
         </h1>
-        <p className="mt-5 text-lg leading-relaxed text-fg-2">{project.standfirst}</p>
+        <p className="mt-5 max-w-2xl text-lg leading-relaxed text-fg-2">{project.standfirst}</p>
       </header>
 
-      <figure className="mt-10 overflow-hidden rounded-3xl bg-gradient-to-br from-brand via-brand-2 to-brand-3 p-8 shadow-lift sm:p-14">
-        {/* The illustrations are 200x120 viewBox with no intrinsic size, so cap
-            the width or they scale to the full container. */}
+      {/* The illustrations use white fills, so they sit on a solid dark panel
+          rather than on the page ground. */}
+      <figure className="mt-10 border border-line bg-panel p-8 sm:p-14">
         <div className="mx-auto max-w-2xl">
           <Illustration />
         </div>
       </figure>
 
-      <div className="mt-12 grid gap-10 lg:grid-cols-[280px_1fr] lg:gap-14">
+      <div className="mt-12 grid gap-10 lg:grid-cols-[240px_1fr] lg:gap-16">
         <aside className="lg:sticky lg:top-24 lg:self-start">
-          <dl className="rounded-2xl border border-line bg-surface p-6 shadow-card">
-            {facts.map((fact, i) => (
-              <div key={fact.label} className={i > 0 ? 'mt-4 border-t border-line pt-4' : ''}>
-                <dt className="text-xs font-semibold tracking-[0.12em] text-fg-3 uppercase">
-                  {fact.label}
-                </dt>
-                <dd className="mt-1.5 text-sm leading-relaxed text-fg">{fact.value}</dd>
+          <dl className="border-t border-line">
+            {facts.map((fact) => (
+              <div key={fact.label} className="border-b border-line py-3.5">
+                <dt className="label">{fact.label}</dt>
+                <dd className="mt-1.5 font-mono text-sm leading-relaxed text-fg-2">{fact.value}</dd>
               </div>
             ))}
           </dl>
         </aside>
 
         <div className="min-w-0">
-          {project.sections.map((section) => (
+          {project.sections.map((section, i) => (
             <section key={section.heading} className="mb-10 last:mb-0">
-              <h2 className="text-xl font-bold tracking-tight sm:text-2xl">{section.heading}</h2>
-              {section.body.map((paragraph, i) => (
-                <p key={i} className="mt-4 leading-relaxed text-fg-2">
+              <h2 className="flex gap-4 text-xl font-semibold tracking-tight">
+                <span className="font-mono text-sm text-accent tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                {section.heading}
+              </h2>
+              {section.body.map((paragraph, j) => (
+                <p key={j} className="mt-4 max-w-2xl leading-relaxed text-fg-2 sm:ml-10">
                   {paragraph}
                 </p>
               ))}
             </section>
           ))}
 
-          <div className="mt-10 flex flex-wrap gap-3">
+          <div className="mt-10 flex flex-wrap gap-6 font-mono text-sm sm:ml-10">
             {project.links.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 target="_blank"
                 rel="noopener"
-                className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-brand to-brand-2 px-5 py-3 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                className="border-b border-accent pb-0.5 text-accent transition-opacity hover:opacity-70"
               >
-                {link.label}
-                <svg viewBox="0 0 24 24" className="size-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
-                  <path d="M7 17 17 7M9 7h8v8" />
-                </svg>
+                {link.label} ↗
               </a>
             ))}
           </div>
         </div>
       </div>
 
-      <nav className="mt-20 border-t border-line pt-10" aria-label="More work">
-        <p className="text-xs font-semibold tracking-[0.14em] text-brand uppercase">More work</p>
-        <ul className="mt-6 grid gap-4 sm:grid-cols-2">
-          {others.map((p) => (
+      <nav className="mt-20 border-t border-line pt-8" aria-label="More work">
+        <p className="label">more work</p>
+        <ul className="mt-4">
+          {others.map((p, i) => (
             <li key={p.id}>
               <a
                 href={`#/work/${p.id}`}
-                className="group flex h-full flex-col rounded-2xl border border-line bg-surface p-5 shadow-card transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                className="row-rule group grid grid-cols-[auto_1fr_auto] items-baseline gap-x-5 border-b border-line py-4 sm:gap-x-8"
               >
-                <span className="text-xs font-medium text-fg-3">{p.year}</span>
-                <span className="mt-1.5 font-semibold tracking-tight text-balance group-hover:text-brand">
+                <span className="font-mono text-xs text-fg-3 tabular-nums">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
+                <span className="font-medium text-balance transition-colors group-hover:text-accent">
                   {p.title}
                 </span>
-                <span className="mt-2 text-sm leading-relaxed text-fg-2">{p.standfirst}</span>
+                <span className="font-mono text-xs text-fg-3 tabular-nums">{p.year}</span>
               </a>
             </li>
           ))}

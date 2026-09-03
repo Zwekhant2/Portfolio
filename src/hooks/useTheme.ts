@@ -4,9 +4,9 @@ export type Theme = 'light' | 'dark'
 const STORAGE_KEY = 'zkl-theme'
 
 function getInitialTheme(): Theme {
-  if (typeof window === 'undefined') return 'light'
-  const saved = window.localStorage.getItem(STORAGE_KEY)
-  return saved === 'dark' ? 'dark' : 'light'
+  if (typeof window === 'undefined') return 'dark'
+  // Dark-first: light is the variant you opt into.
+  return window.localStorage.getItem(STORAGE_KEY) === 'light' ? 'light' : 'dark'
 }
 
 export function useTheme() {

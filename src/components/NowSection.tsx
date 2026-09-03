@@ -3,7 +3,7 @@ import { SectionHeading } from './SectionHeading'
 
 const ENTRIES: { term: string; detail: React.ReactNode }[] = [
   {
-    term: 'Recently',
+    term: 'recently',
     detail: (
       <>
         Completed a web development traineeship at{' '}
@@ -13,7 +13,7 @@ const ENTRIES: { term: string; detail: React.ReactNode }[] = [
     ),
   },
   {
-    term: 'Graduated',
+    term: 'graduated',
     detail: (
       <>
         BBA in Business Information Technology from{' '}
@@ -23,7 +23,7 @@ const ENTRIES: { term: string; detail: React.ReactNode }[] = [
     ),
   },
   {
-    term: 'Thesis',
+    term: 'thesis',
     detail: (
       <>
         <strong className="font-semibold text-fg">
@@ -35,7 +35,7 @@ const ENTRIES: { term: string; detail: React.ReactNode }[] = [
     ),
   },
   {
-    term: 'Building',
+    term: 'building',
     detail: (
       <>
         This portfolio, rebuilt in{' '}
@@ -45,7 +45,7 @@ const ENTRIES: { term: string; detail: React.ReactNode }[] = [
     ),
   },
   {
-    term: 'Open to',
+    term: 'open to',
     detail:
       'Full-stack, front-end and cloud roles in Helsinki, or remote across Finland and the Nordics.',
   },
@@ -55,27 +55,21 @@ export function NowSection() {
   const { ref, visible } = useReveal<HTMLDivElement>()
 
   return (
-    <section className="scroll-mt-24 py-20 sm:py-28" id="now">
-      <SectionHeading eyebrow="Now" title="What I'm doing this season" />
+    <section className="scroll-mt-24 border-b border-line py-16 sm:py-20" id="now">
+      <SectionHeading eyebrow="now" title="What I'm doing this season" />
 
-      <div
-        ref={ref}
-        className={`reveal reveal-d1 mx-auto mt-14 max-w-3xl${visible ? ' visible' : ''}`}
-      >
-        {/* Timeline: a gradient spine with a node per entry. */}
-        <ol className="relative space-y-8 before:absolute before:top-2 before:bottom-2 before:left-[7px] before:w-px before:bg-gradient-to-b before:from-brand before:via-brand-2 before:to-transparent">
+      <div ref={ref} className={`reveal reveal-d1 mt-12 border-t border-line${visible ? ' visible' : ''}`}>
+        <dl>
           {ENTRIES.map((entry) => (
-            <li key={entry.term} className="relative pl-9">
-              <span className="absolute top-1.5 left-0 grid size-[15px] place-items-center rounded-full border-2 border-brand bg-bg">
-                <span className="size-1.5 rounded-full bg-brand" />
-              </span>
-              <h3 className="text-xs font-semibold tracking-[0.12em] text-brand uppercase">
-                {entry.term}
-              </h3>
-              <p className="mt-2 leading-relaxed text-fg-2">{entry.detail}</p>
-            </li>
+            <div
+              key={entry.term}
+              className="grid gap-2 border-b border-line py-5 sm:grid-cols-[8rem_1fr] sm:gap-8"
+            >
+              <dt className="label sm:pt-1">{entry.term}</dt>
+              <dd className="max-w-2xl leading-relaxed text-fg-2">{entry.detail}</dd>
+            </div>
           ))}
-        </ol>
+        </dl>
       </div>
     </section>
   )

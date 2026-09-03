@@ -1,11 +1,10 @@
 import { projects } from '../data/projects'
 import { useCountUp } from '../hooks/useCountUp'
-import { TechMarquee } from './TechMarquee'
 
-const STAT_ICONS = [
-  <path key="a" d="M4 7h16M4 12h16M4 17h10" />,
-  <path key="b" d="m12 3 2.6 5.7 6.4.7-4.8 4.3 1.4 6.3L12 17l-5.6 3 1.4-6.3L3 9.4l6.4-.7L12 3Z" />,
-  <path key="c" d="M12 8v4l3 2M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z" />,
+const STACK_GROUPS = [
+  { label: 'web', items: ['React 19', 'TypeScript', 'PHP', 'WordPress'] },
+  { label: 'api', items: ['C# / .NET 8', 'SQLite', 'Dapper', 'MySQL'] },
+  { label: 'cloud', items: ['AWS', 'CloudFormation', 'Docker', 'Linux'] },
 ]
 
 export function Hero() {
@@ -13,115 +12,93 @@ export function Hero() {
   const projectsCount = useCountUp(projects.length, true)
   const yearsCount = useCountUp(2, true)
 
-  const stats = [
-    { label: 'Projects shipped', value: String(projectsCount) },
-    { label: 'Thesis grade', value: '5 / 5' },
-    { label: 'Years coding', value: `${yearsCount}+` },
+  const readout = [
+    { label: 'projects', value: String(projectsCount).padStart(2, '0') },
+    { label: 'thesis', value: '5/5' },
+    { label: 'ects', value: '210' },
+    { label: 'years', value: `${yearsCount}+` },
   ]
 
   return (
-    <section className="relative overflow-hidden">
-      <div className="aurora" aria-hidden="true" />
+    <section className="border-b border-line pt-14 pb-16 sm:pt-20 sm:pb-20">
+        <p className="font-mono text-xs text-fg-3">
+          <span className="text-accent">zwe</span>@helsinki:~$ whoami
+        </p>
 
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pt-16 pb-20 sm:px-8 sm:pt-24 sm:pb-28">
-        <div className="grid items-center gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
+        <div className="mt-8 grid gap-12 lg:grid-cols-[1fr_260px] lg:gap-16">
           <div>
-            <p className="inline-flex items-center gap-2 rounded-full border border-line bg-surface/70 px-3 py-1.5 text-xs font-medium text-fg-2 backdrop-blur">
-              <span className="relative flex size-2">
-                <span className="absolute inline-flex size-full animate-ping rounded-full bg-brand opacity-70" />
-                <span className="relative inline-flex size-2 rounded-full bg-brand" />
-              </span>
-              Open to work · Helsinki &amp; remote
-            </p>
-
-            <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              Full-Stack &amp; <span className="text-gradient">Cloud Developer</span>
+            <h1 className="max-w-3xl text-4xl leading-[1.08] font-semibold tracking-tight text-balance sm:text-5xl lg:text-6xl">
+              Full-Stack &amp; Cloud Developer
             </h1>
 
-            <p className="mt-6 max-w-xl text-lg leading-relaxed text-fg-2">
+            <p className="mt-6 max-w-2xl leading-relaxed text-fg-2">
               I build web applications with React, TypeScript and C# / .NET, and run them on AWS
               infrastructure I write as code. BBA in Business Information Technology from
               Haaga-Helia, majoring in ICT Infrastructures and Cloud Services.
             </p>
 
-            <div className="mt-8 flex flex-wrap items-center gap-3">
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-3 font-mono text-sm">
               <a
                 href="#work"
-                className="group inline-flex items-center gap-2 rounded-xl bg-gradient-to-br from-brand to-brand-2 px-5 py-3 text-sm font-semibold text-white shadow-glow transition-transform hover:-translate-y-0.5"
+                className="border-b border-accent pb-0.5 text-accent transition-opacity hover:opacity-70"
               >
-                View my work
-                <svg
-                  viewBox="0 0 24 24"
-                  className="size-4 transition-transform duration-300 group-hover:translate-x-1"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden="true"
-                >
-                  <path d="M5 12h14M13 6l6 6-6 6" />
-                </svg>
+                view work →
               </a>
               <a
                 href="#contact"
-                className="rounded-xl border border-line bg-surface px-5 py-3 text-sm font-semibold text-fg shadow-card transition-colors hover:bg-surface-2"
+                className="border-b border-line-2 pb-0.5 text-fg-2 transition-colors hover:border-fg hover:text-fg"
               >
-                Get in touch
+                get in touch
+              </a>
+              <a
+                href={`${import.meta.env.BASE_URL}cv.pdf`}
+                download
+                className="border-b border-line-2 pb-0.5 text-fg-2 transition-colors hover:border-fg hover:text-fg"
+              >
+                cv.pdf
               </a>
             </div>
 
-            <dl className="mt-12 grid max-w-lg grid-cols-3 gap-3 sm:gap-4">
-              {stats.map((stat, i) => (
-                <div
-                  key={stat.label}
-                  className="ring-gradient rounded-2xl border border-line bg-surface p-4 shadow-card"
-                >
-                  <svg
-                    viewBox="0 0 24 24"
-                    className="size-4 text-brand"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="1.8"
-                    aria-hidden="true"
-                  >
-                    {STAT_ICONS[i]}
-                  </svg>
-                  <dd className="mt-2.5 text-2xl font-bold tracking-tight tabular-nums sm:text-3xl">
-                    {stat.value}
-                  </dd>
-                  <dt className="mt-1 text-xs leading-snug text-fg-3">{stat.label}</dt>
+            {/* Data readout: mono, tabular, hairline-separated. */}
+            <dl className="mt-12 grid max-w-2xl grid-cols-2 border-t border-l border-line sm:grid-cols-4">
+              {readout.map((item) => (
+                <div key={item.label} className="border-r border-b border-line px-4 py-3.5">
+                  <dd className="font-mono text-2xl font-medium tabular-nums">{item.value}</dd>
+                  <dt className="label mt-1">{item.label}</dt>
                 </div>
               ))}
             </dl>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xs lg:max-w-none">
-            <div
-              className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-brand/30 via-brand-2/20 to-brand-3/25 blur-2xl"
-              aria-hidden="true"
-            />
-            <figure className="relative overflow-hidden rounded-3xl border border-line bg-surface shadow-lift">
+          <div className="lg:pt-2">
+            <figure className="relative">
               <img
                 src={`${import.meta.env.BASE_URL}photo.jpg`}
                 alt="Zwe Khant Lwin"
-                className="aspect-[4/5] w-full object-cover"
+                className="aspect-[4/5] w-full max-w-[260px] border border-line object-cover grayscale transition-all duration-500 hover:grayscale-0"
               />
-              <figcaption className="absolute inset-x-3 bottom-3 rounded-xl border border-white/15 bg-black/45 px-4 py-3 text-white backdrop-blur-md">
-                <p className="text-sm font-semibold">Zwe Khant Lwin</p>
-                <p className="text-xs text-white/70">Vantaa, Finland</p>
+              <figcaption className="mt-3 font-mono text-xs text-fg-3">
+                Zwe Khant Lwin
+                <br />
+                Vantaa, FI · UTC+2
               </figcaption>
             </figure>
-
-            <span className="absolute -top-3 -right-3 rotate-3 rounded-xl border border-line bg-surface px-3 py-2 text-xs font-semibold shadow-lift">
-              🎓 BBA · 2026
-            </span>
-            <span className="absolute -bottom-4 -left-4 -rotate-3 rounded-xl border border-line bg-surface px-3 py-2 text-xs font-semibold shadow-lift">
-              ☁️ AWS · CCNA
-            </span>
           </div>
         </div>
 
-        <TechMarquee />
-      </div>
+        {/* Stack, grouped and static — a list, not a marquee. */}
+        <div className="mt-14 grid gap-x-10 gap-y-6 border-t border-line pt-8 sm:grid-cols-3">
+          {STACK_GROUPS.map((group) => (
+            <div key={group.label}>
+              <p className="label">{group.label}</p>
+              <ul className="mt-2.5 space-y-1.5 font-mono text-sm text-fg-2">
+                {group.items.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
     </section>
   )
 }
