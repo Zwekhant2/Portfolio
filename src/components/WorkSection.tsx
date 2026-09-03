@@ -10,12 +10,15 @@ export function WorkSection() {
         title={`${projects.length} things I built, and what went wrong in them`}
         lede="Each one is written up properly — the decisions, the trade-offs, and the parts that did not go to plan."
       />
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {/* Bento: the first card runs double width, so the grid reads as a
+          composition rather than a row of identical tiles. */}
+      <div className="mt-14 grid auto-rows-fr gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {projects.map((project, i) => (
           <ProjectCard
             key={project.id}
             project={project}
             delay={((i % 3) + 1) as 1 | 2 | 3}
+            featured={i === 0}
           />
         ))}
       </div>

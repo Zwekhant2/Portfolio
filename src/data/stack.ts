@@ -1,0 +1,20 @@
+/** Technologies shown in the hero marquee, in the order they scroll. */
+export const marqueeStack: string[] = [
+  'React 19',
+  'TypeScript',
+  'C# / .NET 8',
+  'AWS',
+  'CloudFormation',
+  'Docker',
+  'Linux',
+  'SQLite',
+  'Dapper',
+  'WordPress',
+  'PHP',
+  'MySQL',
+  'Bash',
+  'Git',
+  'Cisco / CCNA',
+  'Fly.io',
+  'Vercel',
+]

@@ -161,3 +161,118 @@
   .reveal { opacity: 1; transform: none; transition: none; }
   ::view-transition-group(*) { animation-duration: 0.01s; }
 }
+
+/* ─── Ambient background ────────────────────────────────────── */
+/* A dot grid, faded out toward the edges so it reads as texture rather
+   than as a pattern with a visible boundary. */
+.bg-field {
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: radial-gradient(circle at 1px 1px, var(--line) 1px, transparent 0);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 90% 60% at 50% 0%, #000 20%, transparent 75%);
+  opacity: 0.75;
+}
+
+/* Two slow-drifting colour fields. Blurred hard enough that the movement
+   registers as light shifting, not as objects sliding. */
+.bg-orb {
+  position: fixed;
+  z-index: -1;
+  pointer-events: none;
+  border-radius: 50%;
+  filter: blur(90px);
+  opacity: 0.34;
+  will-change: transform;
+}
+.bg-orb-1 {
+  width: 46vw;
+  height: 46vw;
+  top: -14vw;
+  left: -10vw;
+  background: radial-gradient(circle, var(--brand), transparent 68%);
+  animation: drift-a 26s var(--ease-out-soft) infinite alternate;
+}
+.bg-orb-2 {
+  width: 40vw;
+  height: 40vw;
+  top: 2vw;
+  right: -12vw;
+  background: radial-gradient(circle, var(--brand-2), transparent 68%);
+  animation: drift-b 32s var(--ease-out-soft) infinite alternate;
+}
+[data-theme='dark'] .bg-orb { opacity: 0.26; }
+
+@keyframes drift-a {
+  to { transform: translate3d(7vw, 5vw, 0) scale(1.14); }
+}
+@keyframes drift-b {
+  to { transform: translate3d(-6vw, 8vw, 0) scale(0.9); }
+}
+
+/* ─── Gradient border ───────────────────────────────────────── */
+/* Painted as a masked ring so the card keeps its own background: a plain
+   gradient background would bleed through a translucent surface. */
+.ring-gradient {
+  position: relative;
+}
+.ring-gradient::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, var(--brand), var(--brand-2) 45%, var(--brand-3));
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease-out-soft);
+  pointer-events: none;
+}
+.ring-gradient:hover::after,
+.ring-gradient:focus-within::after { opacity: 1; }
+
+/* ─── Cursor spotlight ─────────────────────────────────────── */
+/* useSpotlight writes --mx/--my; the glow is inert until it does. */
+.spotlight { position: relative; }
+.spotlight::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    260px circle at var(--mx, 50%) var(--my, 0%),
+    color-mix(in oklab, var(--brand) 16%, transparent),
+    transparent 70%
+  );
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out-soft);
+  pointer-events: none;
+  z-index: 0;
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* ─── Marquee ───────────────────────────────────────────────── */
+.marquee { mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 42s linear infinite;
+}
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee {
+  to { transform: translate3d(-50%, 0, 0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bg-orb { animation: none; }
+  .marquee-track { animation: none; }
+}

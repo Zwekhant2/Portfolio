@@ -12,6 +12,7 @@ import { Credentials } from './components/Credentials'
 import { Contact } from './components/Contact'
 import { Footer } from './components/Footer'
 import { ProjectDetail } from './components/ProjectDetail'
+import { ScrollProgress } from './components/ScrollProgress'
 
 const SITE_TITLE = 'Zwe Khant Lwin — Full-Stack & Cloud Developer'
 
@@ -37,6 +38,10 @@ export default function App() {
 
   return (
     <>
+      <div className="bg-field" aria-hidden="true" />
+      <div className="bg-orb bg-orb-1" aria-hidden="true" />
+      <div className="bg-orb bg-orb-2" aria-hidden="true" />
+      <ScrollProgress />
       <NavStrip
         theme={theme}
         onToggleTheme={toggleTheme}

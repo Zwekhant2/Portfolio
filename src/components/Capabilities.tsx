@@ -1,5 +1,6 @@
 import { capabilities } from '../data/capabilities'
 import { useReveal } from '../hooks/useReveal'
+import { useSpotlight } from '../hooks/useSpotlight'
 import { SectionHeading } from './SectionHeading'
 
 // One icon per capability column, in data order.
@@ -11,38 +12,50 @@ const ICONS = [
 
 function CapCard({ title, items, index }: { title: string; items: string[]; index: number }) {
   const { ref, visible } = useReveal<HTMLDivElement>()
+  const { ref: spotRef, onMouseMove } = useSpotlight<HTMLDivElement>()
   const delay = (index % 3) + 1
+  // The first column is the widest one, so give it the double-width tile.
+  const featured = index === 0
 
-  // The reveal lives on a wrapper: on the card itself its transition would
-  // collide with the card's own hover transition.
   return (
-    <div ref={ref} className={`reveal reveal-d${delay} h-full${visible ? ' visible' : ''}`}>
-      <div className="card-sheen h-full rounded-2xl border border-line bg-surface p-6 shadow-card transition-shadow duration-300 hover:shadow-lift">
-        <span className="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-glow">
-          <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.8">
-            {ICONS[index % ICONS.length]}
-          </svg>
-        </span>
+    <div
+      ref={ref}
+      className={`reveal reveal-d${delay} h-full${featured ? ' lg:col-span-2' : ''}${
+        visible ? ' visible' : ''
+      }`}
+    >
+      <div
+        ref={spotRef}
+        onMouseMove={onMouseMove}
+        className="ring-gradient spotlight h-full rounded-2xl border border-line bg-surface p-6 shadow-card transition-shadow duration-300 hover:shadow-lift"
+      >
+        <div className="relative z-10">
+          <span className="grid size-11 place-items-center rounded-xl bg-gradient-to-br from-brand to-brand-2 text-white shadow-glow">
+            <svg viewBox="0 0 24 24" className="size-5" fill="none" stroke="currentColor" strokeWidth="1.8">
+              {ICONS[index % ICONS.length]}
+            </svg>
+          </span>
 
-        <h3 className="mt-5 text-lg font-semibold tracking-tight">{title}</h3>
+          <h3 className="mt-5 text-lg font-semibold tracking-tight">{title}</h3>
 
-        <ul className="mt-4 space-y-2.5">
-          {items.map((item) => (
-            <li key={item} className="flex items-start gap-2.5 text-sm text-fg-2">
-              <svg
-                viewBox="0 0 24 24"
-                className="mt-0.5 size-4 shrink-0 text-brand"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.2"
-                aria-hidden="true"
-              >
-                <path d="m5 13 4 4L19 7" />
-              </svg>
-              {item}
-            </li>
-          ))}
-        </ul>
+          <ul className={`mt-4 gap-x-6 space-y-2.5${featured ? ' sm:columns-2' : ''}`}>
+            {items.map((item) => (
+              <li key={item} className="flex items-start gap-2.5 text-sm text-fg-2">
+                <svg
+                  viewBox="0 0 24 24"
+                  className="mt-0.5 size-4 shrink-0 text-brand"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  aria-hidden="true"
+                >
+                  <path d="m5 13 4 4L19 7" />
+                </svg>
+                {item}
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   )
@@ -56,7 +69,7 @@ export function Capabilities() {
         title="What I can do for you"
         lede="From the browser down to the VLAN — the full path a request takes."
       />
-      <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="mt-14 grid auto-rows-fr gap-6 md:grid-cols-2 lg:grid-cols-3">
         {capabilities.map((col, i) => (
           <CapCard key={col.title} title={col.title} items={col.items} index={i} />
         ))}
